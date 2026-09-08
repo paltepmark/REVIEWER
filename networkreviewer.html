@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Cloud Foundations - Interactive Study Reviewer & Mock Exam</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        slate: {
+                            850: '#151f32',
+                            900: '#0f172a',
+                            950: '#020617',
+                        },
+                        sky: {
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans flex flex-col antialiased">
+
+    <!-- Header Navigation -->
+    <header class="bg-slate-900 border-b border-slate-800 sticky top-0 z-40 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <div class="p-2 bg-sky-500/10 border border-sky-500/30 rounded-lg text-sky-400">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 001-9.999 5.002 5.002 0 00-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
+                    </div>
+                    <div>
+                        <h1 class="text-lg font-bold text-white tracking-wide">AWS Cloud Foundations</h1>
+                        <p class="text-xs text-slate-400">IT2607 • Modules 1 & 2 Comprehensive Reviewer</p>
+                    </div>
+                </div>
+                
+                <!-- Tab Buttons -->
+                <nav class="flex space-x-2 bg-slate-950 p-1 rounded-xl border border-slate-800">
+                    <button id="tab-reviewer-btn" onclick="switchTab('reviewer')" class="flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 bg-sky-500 text-white shadow-md">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                        Core Notes
+                    </button>
+                    <button id="tab-exam-btn" onclick="switchTab('exam')" class="flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 text-slate-400 hover:text-white hover:bg-slate-800">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Mock Exam (50 Qs)
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 mb-20">
+
+        <!-- TAB 1: CORE NOTES REVIEWER -->
+        <div id="view-reviewer" class="space-y-10">
+            <!-- Header Banner -->
+            <div class="bg-gradient-to-r from-slate-900 via-slate-850 to-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-xl">
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-2">Cloud Concepts, Economics & Billing</h2>
+                <p class="text-slate-400 text-sm sm:text-base max-w-3xl">Comprehensive study notes structured directly from the AWS Cloud Foundations curriculum (IT2607 Handouts 1 & 2).</p>
+            </div>
+
+            <!-- Module 1 Section -->
+            <section class="space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-800 pb-3">
+                    <span class="text-xs font-semibold uppercase tracking-wider text-sky-400 bg-sky-500/10 px-3 py-1 rounded-full border border-sky-500/20">Module 1</span>
+                    <h3 class="text-xl font-bold text-white">Cloud Concepts Overview</h3>
+                </div>
+
+                <!-- 6 Advantages Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-slate-700 transition">
+                        <h4 class="font-bold text-sky-400 mb-2 flex items-center gap-2">
+                            <span class="text-xs bg-slate-800 text-sky-300 px-2 py-0.5 rounded">1</span> Trade CapEx for OpEx
+                        </h4>
+                        <p class="text-xs text-slate-300 leading-relaxed">Replace upfront physical infrastructure investments (Capital Expenditure) with variable pay-as-you-go operating expenses (Operational Expenditure). Reduce unnecessary spending and scale according to demand.</p>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-slate-700 transition">
+                        <h4 class="font-bold text-sky-400 mb-2 flex items-center gap-2">
+                            <span class="text-xs bg-slate-800 text-sky-300 px-2 py-0.5 rounded">2</span> Massive Economies of Scale
+                        </h4>
+                        <p class="text-xs text-slate-300 leading-relaxed">Aggregated usage from hundreds of thousands of customers allows providers like AWS to achieve higher economies of scale, passing savings directly to customers via lower pay-as-you-go prices.</p>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-slate-700 transition">
+                        <h4 class="font-bold text-sky-400 mb-2 flex items-center gap-2">
+                            <span class="text-xs bg-slate-800 text-sky-300 px-2 py-0.5 rounded">3</span> Stop Guessing Capacity
+                        </h4>
+                        <p class="text-xs text-slate-300 leading-relaxed">Eliminate overprovisioning (unused idle equipment) and underprovisioning (capacity shortages/performance degradation) by dynamically scaling capacity up or down on demand.</p>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-slate-700 transition">
+                        <h4 class="font-bold text-sky-400 mb-2 flex items-center gap-2">
+                            <span class="text-xs bg-slate-800 text-sky-300 px-2 py-0.5 rounded">4</span> Increase Speed & Agility
+                        </h4>
+                        <p class="text-xs text-slate-300 leading-relaxed">Provision IT resources in minutes via a few clicks or code instead of waiting weeks/months for hardware procurement, setup, and configuration.</p>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-slate-700 transition">
+                        <h4 class="font-bold text-sky-400 mb-2 flex items-center gap-2">
+                            <span class="text-xs bg-slate-800 text-sky-300 px-2 py-0.5 rounded">5</span> Stop Spending Money on DC Ops
+                        </h4>
+                        <p class="text-xs text-slate-300 leading-relaxed">Outsource rack, stack, power, cooling, and hardware maintenance to the provider. Shift technical staff focus onto applications, business logic, and innovation.</p>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-slate-700 transition">
+                        <h4 class="font-bold text-sky-400 mb-2 flex items-center gap-2">
+                            <span class="text-xs bg-slate-800 text-sky-300 px-2 py-0.5 rounded">6</span> Go Global in Minutes
+                        </h4>
+                        <p class="text-xs text-slate-300 leading-relaxed">Deploy applications across multiple AWS Regions worldwide effortlessly to reduce network latency and provide a superior customer experience globally.</p>
+                    </div>
+                </div>
+
+                <!-- Service Models vs Deployment Models -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-6">
+                        <h4 class="font-bold text-lg text-white mb-4 border-b border-slate-800 pb-2">Cloud Service Models</h4>
+                        <div class="space-y-3">
+                            <div class="bg-slate-950 p-3.5 rounded-lg border border-slate-800/80">
+                                <span class="font-semibold text-sky-400 text-sm">IaaS (Infrastructure as a Service)</span>
+                                <p class="text-xs text-slate-400 mt-1">Provides basic building blocks (virtual servers, storage, networking). Highest control over OS and software. Provider manages underlying hardware. <i class="text-slate-500">(e.g., EC2)</i></p>
+                            </div>
+                            <div class="bg-slate-950 p-3.5 rounded-lg border border-slate-800/80">
+                                <span class="font-semibold text-sky-400 text-sm">PaaS (Platform as a Service)</span>
+                                <p class="text-xs text-slate-400 mt-1">Provider manages OS, hardware, database engines, and runtime. Developers focus exclusively on deploying and running code without maintaining infrastructure. <i class="text-slate-500">(e.g., Elastic Beanstalk)</i></p>
+                            </div>
+                            <div class="bg-slate-950 p-3.5 rounded-lg border border-slate-800/80">
+                                <span class="font-semibold text-sky-400 text-sm">SaaS (Software as a Service)</span>
+                                <p class="text-xs text-slate-400 mt-1">Complete end-user applications delivered over the web. Managed entirely by the vendor. <i class="text-slate-500">(e.g., Web-based email services)</i></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-6">
+                        <h4 class="font-bold text-lg text-white mb-4 border-b border-slate-800 pb-2">Cloud Deployment Models</h4>
+                        <div class="space-y-3">
+                            <div class="bg-slate-950 p-3.5 rounded-lg border border-slate-800/80">
+                                <span class="font-semibold text-sky-400 text-sm">Cloud (Fully Cloud-based)</span>
+                                <p class="text-xs text-slate-400 mt-1">Applications are fully deployed in the cloud with all infrastructure running on cloud provider systems.</p>
+                            </div>
+                            <div class="bg-slate-950 p-3.5 rounded-lg border border-slate-800/80">
+                                <span class="font-semibold text-sky-400 text-sm">Hybrid</span>
+                                <p class="text-xs text-slate-400 mt-1">Connects cloud resources directly to legacy on-premises infrastructure to gradually migrate or keep sensitive on-prem systems integrated.</p>
+                            </div>
+                            <div class="bg-slate-950 p-3.5 rounded-lg border border-slate-800/80">
+                                <span class="font-semibold text-sky-400 text-sm">On-Premises / Private Cloud</span>
+                                <p class="text-xs text-slate-400 mt-1">Uses virtualization and resource management within company-owned data centers (resembles traditional IT).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AWS CAF Table -->
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-6">
+                    <h4 class="font-bold text-lg text-white mb-2">AWS Cloud Adoption Framework (AWS CAF) Perspectives</h4>
+                    <p class="text-xs text-slate-400 mb-4">AWS CAF groups guidance into 6 perspectives split between Business Capabilities and Technical Capabilities.</p>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs text-slate-300">
+                            <thead class="bg-slate-950 text-slate-200 border-b border-slate-800">
+                                <tr>
+                                    <th class="p-3">Focus</th>
+                                    <th class="p-3">Perspective</th>
+                                    <th class="p-3">Key Capability Areas</th>
+                                    <th class="p-3">Primary Stakeholders</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-800">
+                                <tr>
+                                    <td class="p-3 font-semibold text-sky-400 bg-slate-950/40" rowspan="3">Business Capabilities</td>
+                                    <td class="p-3 font-bold text-white">Business</td>
+                                    <td class="p-3">IT Finance, IT Strategy, Benefits Realization, Business Risk Mgmt</td>
+                                    <td class="p-3 text-slate-400">Business managers, Finance managers, Budget owners</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-bold text-white">People</td>
+                                    <td class="p-3">Resource/Incentive/Career Mgmt, Training, Org Change Mgmt</td>
+                                    <td class="p-3 text-slate-400">HR, Staffing, People managers</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-bold text-white">Governance</td>
+                                    <td class="p-3">Portfolio Mgmt, Project Mgmt, Performance Measurement, Licensing</td>
+                                    <td class="p-3 text-slate-400">CIO, Program managers, Enterprise architects</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-semibold text-emerald-400 bg-slate-950/40" rowspan="3">Technical Capabilities</td>
+                                    <td class="p-3 font-bold text-white">Platform</td>
+                                    <td class="p-3">Compute, Storage, Network & Database Provisioning, Arch Design</td>
+                                    <td class="p-3 text-slate-400">CTO, IT managers, Solutions architects</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-bold text-white">Security</td>
+                                    <td class="p-3">IAM, Detective Controls, Infra Security, Data Protection, Incident Response</td>
+                                    <td class="p-3 text-slate-400">CISO, IT Security managers/analysts</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-bold text-white">Operations</td>
+                                    <td class="p-3">Service Monitoring, Resource Inventory, Release Mgmt, BC/DR</td>
+                                    <td class="p-3 text-slate-400">IT Operations managers, Support managers</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Module 2 Section -->
+            <section class="space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-800 pb-3">
+                    <span class="text-xs font-semibold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">Module 2</span>
+                    <h3 class="text-xl font-bold text-white">Cloud Economics and Billing</h3>
+                </div>
+
+                <!-- Pricing & TCO Summary Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-5">
+                        <h4 class="font-bold text-emerald-400 mb-3 text-sm">Fundamental Pricing Drivers</h4>
+                        <ul class="space-y-2 text-xs text-slate-300">
+                            <li class="p-2 bg-slate-950 rounded border border-slate-800">
+                                <strong class="text-white">Compute:</strong> Charged by the hour or second depending on instance type/service.
+                            </li>
+                            <li class="p-2 bg-slate-950 rounded border border-slate-800">
+                                <strong class="text-white">Storage:</strong> Charged typically per gigabyte (GB) allocated/stored.
+                            </li>
+                            <li class="p-2 bg-slate-950 rounded border border-slate-800">
+                                <strong class="text-white">Data Transfer:</strong> Inbound data transfer is <em>FREE</em>. Outbound transfer is charged per GB across services.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-5">
+                        <h4 class="font-bold text-emerald-400 mb-3 text-sm">Reserved Instance Options</h4>
+                        <ul class="space-y-2 text-xs text-slate-300">
+                            <li class="p-2 bg-slate-950 rounded border border-slate-800">
+                                <strong class="text-white">All Upfront (AURI):</strong> Largest upfront payment, highest discount percentage.
+                            </li>
+                            <li class="p-2 bg-slate-950 rounded border border-slate-800">
+                                <strong class="text-white">Partial Upfront (PURI):</strong> Moderate upfront payment, medium discount.
+                            </li>
+                            <li class="p-2 bg-slate-950 rounded border border-slate-800">
+                                <strong class="text-white">No Upfront (NURI):</strong> $0 upfront payment, smallest discount among reserved options.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-5">
+                        <h4 class="font-bold text-emerald-400 mb-3 text-sm">Services with No Direct Charge</h4>
+                        <p class="text-xs text-slate-400 mb-2">These services have no direct core service fee (though underlying provisioned resources like EC2/EBS cost money):</p>
+                        <div class="flex flex-wrap gap-1.5 text-xs">
+                            <span class="bg-slate-800 text-slate-200 px-2 py-1 rounded">Amazon VPC</span>
+                            <span class="bg-slate-800 text-slate-200 px-2 py-1 rounded">AWS IAM</span>
+                            <span class="bg-slate-800 text-slate-200 px-2 py-1 rounded">AWS CloudFormation</span>
+                            <span class="bg-slate-800 text-slate-200 px-2 py-1 rounded">AWS Elastic Beanstalk</span>
+                            <span class="bg-slate-800 text-slate-200 px-2 py-1 rounded">Auto Scaling Services</span>
+                            <span class="bg-slate-800 text-slate-200 px-2 py-1 rounded">Consolidated Billing</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Support Plans Comparison Table -->
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-6">
+                    <h4 class="font-bold text-lg text-white mb-2">AWS Support Plans Overview</h4>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs text-slate-300">
+                            <thead class="bg-slate-950 text-slate-200 border-b border-slate-800">
+                                <tr>
+                                    <th class="p-3">Support Plan</th>
+                                    <th class="p-3">Intended Workloads</th>
+                                    <th class="p-3">Key Features & Assistance</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-800">
+                                <tr>
+                                    <td class="p-3 font-bold text-white">Basic</td>
+                                    <td class="p-3 text-slate-400">All customers (Default)</td>
+                                    <td class="p-3">Customer service, docs, whitepapers, forums, selected health checks. No technical case support.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-bold text-sky-400">Developer</td>
+                                    <td class="p-3 text-slate-400">Testing & non-production workloads</td>
+                                    <td class="p-3">Technical guidance via email, 1 primary contact, business-hours response.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-bold text-emerald-400">Business</td>
+                                    <td class="p-3 text-slate-400">Production workloads</td>
+                                    <td class="p-3">24/7 phone/chat/web technical support, full Trusted Advisor checks, Support Concierge for billing.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-bold text-purple-400">Enterprise</td>
+                                    <td class="p-3 text-slate-400">Mission-critical workloads</td>
+                                    <td class="p-3">Includes a dedicated Technical Account Manager (TAM), 15-minute response for critical cases, proactive guidance.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+
+        <!-- TAB 2: INTERACTIVE MOCK EXAM -->
+        <div id="view-exam" class="hidden space-y-8">
+            <div class="bg-gradient-to-r from-slate-900 via-slate-850 to-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white">AWS Cloud Mock Examination</h2>
+                    <p class="text-slate-400 text-sm mt-1">50 Multiple-Choice Questions strictly derived from Modules 1 & 2 Handouts.</p>
+                </div>
+                <button onclick="resetExam()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold rounded-lg border border-slate-700 transition">
+                    Reset Answers
+                </button>
+            </div>
+
+            <!-- Questions Container -->
+            <form id="exam-form" class="space-y-6">
+                <!-- Javascript will inject 50 questions here -->
+            </form>
+        </div>
+
+    </main>
+
+    <!-- Sticky Exam Footer Control Bar -->
+    <div id="exam-bar" class="hidden fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-md border-t border-slate-800 p-4 z-50 shadow-2xl">
+        <div class="max-w-7xl mx-auto flex flex-row justify-between items-center px-4">
+            <div class="flex items-center gap-4">
+                <div class="text-left">
+                    <span class="text-xs text-slate-400 uppercase tracking-wider block">Current Score</span>
+                    <span id="score-display" class="text-xl sm:text-2xl font-black text-sky-400">0 / 50 (0%)</span>
+                </div>
+                <div id="status-badge" class="hidden sm:inline-block px-3 py-1 text-xs font-semibold rounded-full bg-slate-800 text-slate-400 border border-slate-700">
+                    Not Submitted
+                </div>
+            </div>
+            <button id="submit-btn" type="button" onclick="gradeExam()" class="px-6 py-3 bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-400 hover:to-sky-500 text-white font-bold text-sm rounded-xl shadow-lg transition transform active:scale-95">
+                Submit Exam
+            </button>
+        </div>
+    </div>
+
+    <!-- JavaScript Application Logic & Question Data -->
+    <script>
+        // Tab Switcher
+        function switchTab(tab) {
+            const revView = document.getElementById('view-reviewer');
+            const examView = document.getElementById('view-exam');
+            const revBtn = document.getElementById('tab-reviewer-btn');
+            const examBtn = document.getElementById('tab-exam-btn');
+            const examBar = document.getElementById('exam-bar');
+
+            if (tab === 'reviewer') {
+                revView.classList.remove('hidden');
+                examView.classList.add('hidden');
+                examBar.classList.add('hidden');
+
+                revBtn.className = "flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 bg-sky-500 text-white shadow-md";
+                examBtn.className = "flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 text-slate-400 hover:text-white hover:bg-slate-800";
+            } else {
+                revView.classList.add('hidden');
+                examView.classList.remove('hidden');
+                examBar.classList.remove('hidden');
+
+                examBtn.className = "flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 bg-sky-500 text-white shadow-md";
+                revBtn.className = "flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 text-slate-400 hover:text-white hover:bg-slate-800";
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Exam Question Bank (50 Questions)
+        const questions = [
+            {
+                q: "1. What is the fundamental definition of cloud computing according to AWS?",
+                options: [
+                    "On-demand delivery of IT resources over the internet with pay-as-you-go pricing",
+                    "Installing and operating physical servers inside company-owned data centers",
+                    "Purchasing software licenses upfront for long-term operational use",
+                    "Using private dedicated local area networks to store encrypted files"
+                ],
+                correct: 0,
+                rationale: "Cloud computing refers to the on-demand delivery of computing resources over the internet with a pay-as-you-go pricing model."
+            },
+            {
+                q: "2. Which advantage of cloud computing replaces large capital upfront investments with lower variable operational costs?",
+                options: [
+                    "Go global in minutes",
+                    "Trade capital expense for variable expense",
+                    "Stop guessing capacity",
+                    "Benefit from massive economies of scale"
+                ],
+                correct: 1,
+                rationale: "Trading capital expense (CapEx) for variable expense (OpEx) allows organizations to pay only for resources when they are consumed."
+            },
+            {
+                q: "3. Cloud providers purchase massive amounts of infrastructure, passing cost savings to users. This advantage is known as:",
+                options: [
+                    "Increasing speed and agility",
+                    "Benefiting from massive economies of scale",
+                    "Infrastructure as Software",
+                    "On-demand provisioning"
+                ],
+                correct: 1,
+                rationale: "Aggregated usage across hundreds of thousands of customers allows cloud providers to achieve massive economies of scale."
+            },
+            {
+                q: "4. What common issue of traditional IT infrastructure is solved by NOT having to guess capacity needs in the cloud?",
+                options: [
+                    "Physical rack mounting errors",
+                    "Overprovisioning and underprovisioning",
+                    "Software license expiration",
+                    "High data transfer latency"
+                ],
+                correct: 1,
+                rationale: "Cloud computing eliminates overprovisioning (idle unused equipment) and underprovisioning (capacity shortages)."
+            },
+            {
+                q: "5. In which cloud service model does the customer have the HIGHEST level of control over operating systems and computing resources?",
+                options: [
+                    "SaaS",
+                    "PaaS",
+                    "IaaS",
+                    "Serverless"
+                ],
+                correct: 2,
+                rationale: "IaaS (Infrastructure as a Service) provides basic building blocks like virtual servers and network, giving customers highest control over OS and applications."
+            },
+            {
+                q: "6. Software as a Service (SaaS) is best described as:",
+                options: [
+                    "Providing raw storage disks and virtual networking components",
+                    "Delivering fully functional software applications accessed via a browser or client",
+                    "Providing a platform for developers to deploy code without operating system access",
+                    "Hardware virtualized inside private corporate facilities"
+                ],
+                correct: 1,
+                rationale: "SaaS provides a complete application run and managed entirely by the service provider (e.g., web-based email)."
+            },
+            {
+                q: "7. Elastic Beanstalk allows developers to deploy code while AWS handles provisioning and load balancing. Which cloud service model is this?",
+                options: [
+                    "IaaS",
+                    "PaaS",
+                    "SaaS",
+                    "On-Premises"
+                ],
+                correct: 1,
+                rationale: "PaaS (Platform as a Service) manages hardware, OS, and runtime so developers can focus purely on application code."
+            },
+            {
+                q: "8. A deployment model that combines cloud resources with existing on-premises infrastructure is called:",
+                options: [
+                    "Private Cloud",
+                    "Hybrid deployment",
+                    "Full Cloud deployment",
+                    "SaaS deployment"
+                ],
+                correct: 1,
+                rationale: "A hybrid deployment connects cloud infrastructure directly to on-premises systems to extend existing systems."
+            },
+            {
+                q: "9. Which AWS service provides virtual network isolation similar to a traditional corporate network?",
+                options: [
+                    "Amazon EC2",
+                    "Amazon VPC",
+                    "Amazon S3",
+                    "AWS IAM"
+                ],
+                correct: 1,
+                rationale: "Amazon Virtual Private Cloud (Amazon VPC) provides a logically isolated virtual network to operate AWS resources."
+            },
+            {
+                q: "10. Which AWS compute service allows running code without managing or provisioning servers?",
+                options: [
+                    "Amazon EC2",
+                    "AWS Lambda",
+                    "Amazon Lightsail",
+                    "AWS Outposts"
+                ],
+                correct: 1,
+                rationale: "AWS Lambda is a serverless compute service that runs code in response to events without requiring server management."
+            },
+            {
+                q: "11. AWS Outposts is designed for which specific deployment requirement?",
+                options: [
+                    "Running AWS infrastructure directly inside an on-premises data center",
+                    "Deploying simple lightweight web applications",
+                    "Running containerized microservices automatically",
+                    "Transferring petabytes of data via physical disks"
+                ],
+                correct: 0,
+                rationale: "AWS Outposts allows organizations to run native AWS infrastructure and services directly inside their on-premises facilities."
+            },
+            {
+                q: "12. What are the three primary methods to create and manage resources in the AWS Cloud?",
+                options: [
+                    "Management Console, AWS CLI, and AWS SDKs",
+                    "SSH, Direct Connect, and Webmail",
+                    "Visual Studio, Eclipse, and NetBeans",
+                    "IAM Policies, SCPs, and TCO Calculator"
+                ],
+                correct: 0,
+                rationale: "AWS offers three interaction methods: the AWS Management Console (GUI), AWS Command Line Interface (CLI), and Software Development Kits (SDKs)."
+            },
+            {
+                q: "13. Software Development Kits (SDKs) allow developers to interact with AWS services using:",
+                options: [
+                    "Physical hardware keys",
+                    "Programming languages like Java and Python",
+                    "Graphical visual controls only",
+                    "Command prompt scripts without APIs"
+                ],
+                correct: 1,
+                rationale: "AWS SDKs provide programming language-specific APIs (Java, Python, Node.js, etc.) to integrate AWS services into application code."
+            },
+            {
+                q: "14. All three interaction methods (Console, CLI, SDKs) interface with AWS through a common:",
+                options: [
+                    "FTP protocol",
+                    "REST-like API",
+                    "Database driver",
+                    "Virtual Private Network"
+                ],
+                correct: 1,
+                rationale: "Underneath the hood, all AWS interaction methods utilize a common REST-like API that forms the foundation of AWS."
+            },
+            {
+                q: "15. What is the primary purpose of the AWS Cloud Adoption Framework (AWS CAF)?",
+                options: [
+                    "To automate billing payments for enterprise accounts",
+                    "To provide guidance and best practices for structured organizational cloud adoption",
+                    "To replace traditional software developers with automated tools",
+                    "To enforce physical security in AWS data centers"
+                ],
+                correct: 1,
+                rationale: "AWS CAF helps organizations build a comprehensive, structured approach to cloud migration across people, processes, and technology."
+            },
+            {
+                q: "16. How many core perspectives are defined in the AWS Cloud Adoption Framework (AWS CAF)?",
+                options: [
+                    "3",
+                    "4",
+                    "6",
+                    "10"
+                ],
+                correct: 2,
+                rationale: "AWS CAF structures its guidance into 6 core perspectives: Business, People, Governance, Platform, Security, and Operations."
+            },
+            {
+                q: "17. Which group of AWS CAF perspectives focuses primarily on BUSINESS capabilities?",
+                options: [
+                    "Platform, Security, Operations",
+                    "Business, People, Governance",
+                    "Finance, Storage, Compute",
+                    "Operations, Security, Platform"
+                ],
+                correct: 1,
+                rationale: "Business, People, and Governance focus on business capabilities, whereas Platform, Security, and Operations focus on technical capabilities."
+            },
+            {
+                q: "18. A Chief Information Security Officer (CISO) would primarily refer to which AWS CAF perspective?",
+                options: [
+                    "Business Perspective",
+                    "Platform Perspective",
+                    "Security Perspective",
+                    "Operations Perspective"
+                ],
+                correct: 2,
+                rationale: "The CISO and security managers focus on the Security Perspective to ensure identity, data protection, and compliance."
+            },
+            {
+                q: "19. Which AWS CAF perspective includes capability areas like Resource Management, Career Management, and Training Management?",
+                options: [
+                    "Governance Perspective",
+                    "People Perspective",
+                    "Business Perspective",
+                    "Operations Perspective"
+                ],
+                correct: 1,
+                rationale: "The People Perspective addresses workforce readiness, skills, training, and organizational change management."
+            },
+            {
+                q: "20. Service Monitoring, Resource Inventory, Release Management, and Business Continuity belong to which AWS CAF perspective?",
+                options: [
+                    "Platform Perspective",
+                    "Security Perspective",
+                    "Operations Perspective",
+                    "Governance Perspective"
+                ],
+                correct: 2,
+                rationale: "The Operations Perspective focuses on day-to-day running, monitoring, and maintaining cloud environments."
+            },
+            {
+                q: "21. What are the three fundamental drivers of cost in AWS cloud computing?",
+                options: [
+                    "Compute, Storage, and Outbound Data Transfer",
+                    "Hardware, Electricity, and Cooling",
+                    "Inbound Data Transfer, CPU Usage, and Rack Space",
+                    "Licensing, Support Plans, and Domain Names"
+                ],
+                correct: 0,
+                rationale: "The 3 fundamental cost drivers across most AWS services are Compute, Storage, and Data Transfer (Outbound)."
+            },
+            {
+                q: "22. How is Inbound Data Transfer generally priced in AWS?",
+                options: [
+                    "Charged at a fixed rate per gigabyte",
+                    "Charged based on CPU load",
+                    "Free of charge across services",
+                    "Charged only during peak business hours"
+                ],
+                correct: 2,
+                rationale: "Inbound data transfer into AWS services is generally free."
+            },
+            {
+                q: "23. How is Outbound Data Transfer handled for billing purposes?",
+                options: [
+                    "It is completely free",
+                    "It is charged per gigabyte and aggregated across services",
+                    "It is billed as a flat annual fee",
+                    "It is included in basic support"
+                ],
+                correct: 1,
+                rationale: "Outbound data transfer is aggregated across services and charged per GB."
+            },
+            {
+                q: "24. Which pricing principle describes receiving lower unit costs as usage volume increases?",
+                options: [
+                    "Pay for what you use",
+                    "Pay less when you reserve",
+                    "Pay less when you use more (tiered pricing)",
+                    "Pay even less as AWS grows"
+                ],
+                correct: 2,
+                rationale: "Under volume-based tiered pricing ('Pay less when you use more'), the unit cost decreases as usage increases."
+            },
+            {
+                q: "25. Which Reserved Instance (RI) option provides the LARGEST percentage discount off on-demand rates?",
+                options: [
+                    "No Upfront Reserved Instance (NURI)",
+                    "Partial Upfront Reserved Instance (PURI)",
+                    "All Upfront Reserved Instance (AURI)",
+                    "On-Demand Instance"
+                ],
+                correct: 2,
+                rationale: "All Upfront Reserved Instances (AURI) require paying the full term upfront in exchange for the largest discount."
+            },
+            {
+                q: "26. What feature of No Upfront Reserved Instances (NURI) is advantageous to companies?",
+                options: [
+                    "It requires $0 upfront payment while offering a discount off on-demand pricing",
+                    "It offers the maximum possible discount",
+                    "It automatically includes Enterprise Support",
+                    "It waives all outbound data transfer fees"
+                ],
+                correct: 0,
+                rationale: "NURI requires no initial upfront cash outlay while still providing a cost discount compared to standard on-demand pricing."
+            },
+            {
+                q: "27. Which of the following AWS services has NO direct usage charge (though managed resources may cost money)?",
+                options: [
+                    "Amazon EC2",
+                    "Amazon Elastic Beanstalk",
+                    "Amazon DynamoDB",
+                    "Amazon RDS"
+                ],
+                correct: 1,
+                rationale: "AWS Elastic Beanstalk itself has no additional charge; you pay only for the AWS resources (EC2, RDS) created to run your application."
+            },
+            {
+                q: "28. What does Total Cost of Ownership (TCO) measure?",
+                options: [
+                    "Only the monthly EC2 server runtime charges",
+                    "Direct and indirect financial costs of owning/operating an infrastructure environment",
+                    "The price of purchasing AWS software stock",
+                    "The penalty costs of breaking a cloud contract"
+                ],
+                correct: 1,
+                rationale: "TCO is a financial estimate that includes both direct expenses (hardware, power) and indirect costs (labor, maintenance, space) of operating infrastructure."
+            },
+            {
+                q: "29. Which of the following represents a DIRECT cost in an on-premises data center TCO comparison?",
+                options: [
+                    "Software development agility",
+                    "Power, physical floor space, and server hardware",
+                    "Customer satisfaction improvement",
+                    "Global brand awareness"
+                ],
+                correct: 1,
+                rationale: "Direct costs are visible tangible expenses such as electricity, physical real estate, server hardware, and licenses."
+            },
+            {
+                q: "30. What tool allows users to model a proposed AWS solution and estimate its monthly costs before building it?",
+                options: [
+                    "AWS Cost Explorer",
+                    "AWS Pricing Calculator",
+                    "AWS Support Concierge",
+                    "AWS TCO Analyzer CLI"
+                ],
+                correct: 1,
+                rationale: "AWS Pricing Calculator is a web-based planning tool used to estimate the monthly costs of proposed AWS architectures."
+            },
+            {
+                q: "31. Increased developer productivity and improved customer satisfaction are examples of cloud adoption:",
+                options: [
+                    "Hard benefits",
+                    "Soft benefits",
+                    "Capital expenditures",
+                    "Direct server savings"
+                ],
+                correct: 1,
+                rationale: "Soft benefits are qualitative advantages that create substantial organizational value (flexibility, speed, satisfaction) but are harder to quantify monetarily."
+            },
+            {
+                q: "32. Direct monetary savings from reduced spending on physical servers and storage are categorized as:",
+                options: [
+                    "Soft benefits",
+                    "Hard benefits",
+                    "Variable liabilities",
+                    "Service Control Policies"
+                ],
+                correct: 1,
+                rationale: "Hard benefits represent direct, visible financial savings or efficiency improvements."
+            },
+            {
+                q: "33. What is AWS Organizations used for?",
+                options: [
+                    "Centralized management and consolidated billing across multiple AWS accounts",
+                    "Deploying software code directly onto EC2 instances",
+                    "Running database queries across multiple regions",
+                    "Monitoring network packet traffic for security threats"
+                ],
+                correct: 0,
+                rationale: "AWS Organizations is an account management service that enables central management, consolidated billing, and policy control across multiple accounts."
+            },
+            {
+                q: "34. In AWS Organizations, what are containers called that group accounts together under the Root node?",
+                options: [
+                    "Security Groups",
+                    "Organizational Units (OUs)",
+                    "Subnets",
+                    "Resource Groups"
+                ],
+                correct: 1,
+                rationale: "Accounts in AWS Organizations are organized into Organizational Units (OUs), creating an inverted tree structure."
+            },
+            {
+                q: "35. How do Service Control Policies (SCPs) differ from IAM Policies?",
+                options: [
+                    "SCPs specify max permissions at the organization/OU level, whereas IAM policies grant permissions to users/roles within an account",
+                    "IAM policies apply to the whole organization while SCPs apply only to single S3 buckets",
+                    "SCPs are used exclusively for billing management while IAM is used for hardware",
+                    "There is no difference; they perform identical functions"
+                ],
+                correct: 0,
+                rationale: "SCPs offer central guardrails over maximum available permissions across accounts in an OU/Org, affecting all IAM users/roles including root."
+            },
+            {
+                q: "36. Which feature of AWS Organizations allows combining account usage to qualify for volume pricing discounts?",
+                options: [
+                    "Consolidated Billing",
+                    "Service Control Policies",
+                    "AWS Trusted Advisor",
+                    "Cost Explorer"
+                ],
+                correct: 0,
+                rationale: "Consolidated Billing aggregates usage across all member accounts in the organization, helping reach higher discount tiers."
+            },
+            {
+                q: "37. Which AWS tool provides a visual chart interface for historical cost visualization and future spending forecasting?",
+                options: [
+                    "AWS Billing Dashboard",
+                    "AWS Cost Explorer",
+                    "AWS Pricing Calculator",
+                    "AWS Budgets"
+                ],
+                correct: 1,
+                rationale: "AWS Cost Explorer lets users visualize, analyze, and forecast cost and usage data over time using charts and reports."
+            },
+            {
+                q: "38. What AWS Billing tool allows setting custom limits and sending automated alerts when spending exceeds thresholds?",
+                options: [
+                    "AWS Cost Explorer",
+                    "AWS Budgets",
+                    "AWS Cost and Usage Reports",
+                    "AWS Support Concierge"
+                ],
+                correct: 1,
+                rationale: "AWS Budgets allows setting custom cost/usage budgets and alerts users when actual or forecasted numbers exceed thresholds."
+            },
+            {
+                q: "39. Where can detailed hourly or daily line-item billing files be delivered for advanced data analysis?",
+                options: [
+                    "An Amazon S3 bucket via AWS Cost and Usage Reports",
+                    "AWS IAM Policy simulator",
+                    "The CISO email inbox directly",
+                    "AWS Outposts local cache"
+                ],
+                correct: 0,
+                rationale: "AWS Cost and Usage Reports generate detailed line-item reports delivered straight to a specified Amazon S3 bucket."
+            },
+            {
+                q: "40. Which AWS Support resource provides automated recommendations across cost optimization, security, performance, and fault tolerance?",
+                options: [
+                    "AWS Support Concierge",
+                    "AWS Trusted Advisor",
+                    "Technical Account Manager",
+                    "AWS Health Dashboard"
+                ],
+                correct: 1,
+                rationale: "AWS Trusted Advisor acts as a customized cloud expert, evaluating environments for cost, performance, security, fault tolerance, and service limits."
+            },
+            {
+                q: "41. What specialized support personnel is assigned exclusively to Enterprise Support plan customers for proactive architectural guidance?",
+                options: [
+                    "Support Concierge",
+                    "Technical Account Manager (TAM)",
+                    "Solutions Architect Generalist",
+                    "Account Billing Agent"
+                ],
+                correct: 1,
+                rationale: "Enterprise Support includes a dedicated Technical Account Manager (TAM) who provides proactive architectural and operational guidance."
+            },
+            {
+                q: "42. Which AWS Support plan provides 24/7 phone, chat, and web support access for production workloads?",
+                options: [
+                    "Basic Support",
+                    "Developer Support",
+                    "Business Support",
+                    "Free Tier Support"
+                ],
+                correct: 2,
+                rationale: "The Business Support plan is designed for production workloads and offers 24/7 technical support access via phone, chat, and web."
+            },
+            {
+                q: "43. A company running non-production/testing environments needing business-hours email technical response should select:",
+                options: [
+                    "Basic Support",
+                    "Developer Support",
+                    "Business Support",
+                    "Enterprise Support"
+                ],
+                correct: 1,
+                rationale: "Developer Support is intended for testing/early development and provides email-based technical support during business hours."
+            },
+            {
+                q: "44. How does Basic Support handle technical support cases?",
+                options: [
+                    "15-minute response time for critical issues",
+                    "Business hours phone support only",
+                    "Basic Support includes NO technical case support",
+                    "Unlimited case logging with 24-hour response"
+                ],
+                correct: 2,
+                rationale: "Basic Support is free for all accounts but includes customer service, documentation, and forums only—it does not include technical case support."
+            },
+            {
+                q: "45. What severity level is assigned to an AWS Support case where business is at risk and critical functions are unavailable?",
+                options: [
+                    "Low",
+                    "Normal",
+                    "High",
+                    "Critical"
+                ],
+                correct: 3,
+                rationale: "A 'Critical' severity case indicates that your primary business is at risk and mission-critical applications are down."
+            },
+            {
+                q: "46. Which AWS Support plan guarantees a response time of 15 minutes or less for Critical severity cases?",
+                options: [
+                    "Developer Support",
+                    "Business Support",
+                    "Enterprise Support",
+                    "All paid support plans"
+                ],
+                correct: 2,
+                rationale: "Enterprise Support offers a 15-minute response guarantee for Critical business-down cases."
+            },
+            {
+                q: "47. Which support resource assists customers specifically with non-technical billing and account-level inquiries?",
+                options: [
+                    "Technical Account Manager (TAM)",
+                    "AWS Support Concierge",
+                    "AWS Systems Manager",
+                    "AWS CloudTrail"
+                ],
+                correct: 1,
+                rationale: "The AWS Support Concierge is a specialized billing and account customer service team available in Enterprise/Business plans."
+            },
+            {
+                q: "48. AWS Identity and Access Management (IAM) and security groups perform functions in AWS comparable to what in traditional IT?",
+                options: [
+                    "SAN storage arrays and tape backups",
+                    "Administrators, firewalls, and access control lists (ACLs)",
+                    "Power distribution units and diesel generators",
+                    "Fiber optic cables and physical routers"
+                ],
+                correct: 1,
+                rationale: "IAM and security groups/NACLs correspond directly to traditional admin accounts, firewalls, and network ACLs."
+            },
+            {
+                q: "49. Why does infrastructure managed as software enable rapid experimentation?",
+                options: [
+                    "It requires purchasing hardware in advance",
+                    "Resources can be created, modified, or terminated within minutes through code or console",
+                    "It eliminates all security risks automatically",
+                    "It guarantees free unlimited compute resources forever"
+                ],
+                correct: 1,
+                rationale: "Viewing infrastructure as software allows instant provisioning and teardown via code/API without waiting for physical hardware."
+            },
+            {
+                q: "50. What AWS tool allows testing the potential impact of IAM and resource policies before deploying them in production?",
+                options: [
+                    "IAM policy simulator",
+                    "AWS Pricing Calculator",
+                    "AWS Cost Explorer",
+                    "AWS CAF Perspective Engine"
+                ],
+                correct: 0,
+                rationale: "The IAM policy simulator allows testing and troubleshooting IAM and organization policies to verify expected access limits."
+            }
+        ];
+
+        // State variables
+        let userAnswers = new Array(questions.length).fill(null);
+        let isSubmitted = false;
+
+        // Render Questions into DOM
+        function renderQuestions() {
+            const container = document.getElementById('exam-form');
+            container.innerHTML = '';
+
+            questions.forEach((q, idx) => {
+                const card = document.createElement('div');
+                card.id = `q-card-${idx}`;
+                card.className = "bg-slate-900 border border-slate-800 rounded-xl p-6 transition-all duration-200 shadow-md";
+
+                let optionsHTML = '';
+                q.options.forEach((opt, optIdx) => {
+                    optionsHTML += `
+                        <label id="label-${idx}-${optIdx}" class="flex items-start p-3.5 rounded-lg border border-slate-800 bg-slate-950/60 hover:bg-slate-800/50 cursor-pointer transition-all duration-150">
+                            <input type="radio" name="question-${idx}" value="${optIdx}" onchange="selectOption(${idx}, ${optIdx})" class="mt-1 h-4 w-4 text-sky-500 border-slate-700 bg-slate-900 focus:ring-sky-500 focus:ring-offset-slate-900">
+                            <span class="ml-3 text-sm text-slate-200 leading-relaxed">${opt}</span>
+                        </label>
+                    `;
+                });
+
+                card.innerHTML = `
+                    <div class="flex items-start justify-between gap-4 mb-4">
+                        <h3 class="text-base font-bold text-white leading-snug">${q.q}</h3>
+                        <span id="badge-${idx}" class="text-xs px-2.5 py-1 rounded font-medium bg-slate-800 text-slate-400 border border-slate-700">Item ${idx+1}</span>
+                    </div>
+                    <div class="space-y-2.5">
+                        ${optionsHTML}
+                    </div>
+                    <div id="rationale-${idx}" class="hidden mt-4 p-4 rounded-lg text-xs leading-relaxed border"></div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Handle Radio Selection
+        function selectOption(qIdx, optIdx) {
+            if (isSubmitted) return; // Freeze selection after submission
+            userAnswers[qIdx] = optIdx;
+            updateLiveScore(false);
+        }
+
+        // Live Score Counter
+        function updateLiveScore(submitted = false) {
+            let correctCount = 0;
+            let answeredCount = 0;
+
+            userAnswers.forEach((ans, idx) => {
+                if (ans !== null) {
+                    answeredCount++;
+                    if (ans === questions[idx].correct) {
+                        correctCount++;
+                    }
+                }
+            });
+
+            const scoreDisplay = document.getElementById('score-display');
+            const statusBadge = document.getElementById('status-badge');
+
+            if (!submitted) {
+                scoreDisplay.textContent = `${answeredCount} / ${questions.length} Answered`;
+            } else {
+                const percentage = Math.round((correctCount / questions.length) * 100);
+                scoreDisplay.textContent = `Score: ${correctCount} / ${questions.length} (${percentage}%)`;
+                
+                statusBadge.classList.remove('hidden');
+                if (percentage >= 75) {
+                    statusBadge.textContent = "PASSED";
+                    statusBadge.className = "hidden sm:inline-block px-3 py-1 text-xs font-bold rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40";
+                } else {
+                    statusBadge.textContent = "NEEDS REVIEW";
+                    statusBadge.className = "hidden sm:inline-block px-3 py-1 text-xs font-bold rounded-full bg-rose-500/20 text-rose-400 border border-rose-500/40";
+                }
+            }
+        }
+
+        // Grade Exam and Display Feedback
+        function gradeExam() {
+            if (isSubmitted) return;
+            isSubmitted = true;
+
+            let correctCount = 0;
+
+            questions.forEach((q, idx) => {
+                const card = document.getElementById(`q-card-${idx}`);
+                const rationaleBox = document.getElementById(`rationale-${idx}`);
+                const itemBadge = document.getElementById(`badge-${idx}`);
+                const userAns = userAnswers[idx];
+
+                // Disable inputs
+                const inputs = card.querySelectorAll('input[type="radio"]');
+                inputs.forEach(i => i.disabled = true);
+
+                // Highlight options
+                q.options.forEach((_, optIdx) => {
+                    const label = document.getElementById(`label-${idx}-${optIdx}`);
+                    if (optIdx === q.correct) {
+                        // Correct option styling
+                        label.className = "flex items-start p-3.5 rounded-lg border border-emerald-500/60 bg-emerald-950/30 text-emerald-200 font-medium";
+                    } else if (optIdx === userAns && userAns !== q.correct) {
+                        // Wrong option selected by user
+                        label.className = "flex items-start p-3.5 rounded-lg border border-rose-500/60 bg-rose-950/30 text-rose-200";
+                    } else {
+                        label.className = "flex items-start p-3.5 rounded-lg border border-slate-800/40 bg-slate-950/20 opacity-50";
+                    }
+                });
+
+                // Display Rationale
+                rationaleBox.classList.remove('hidden');
+                if (userAns === q.correct) {
+                    correctCount++;
+                    card.className = "bg-slate-900 border-2 border-emerald-500/40 rounded-xl p-6 shadow-md";
+                    itemBadge.className = "text-xs px-2.5 py-1 rounded font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/40";
+                    itemBadge.textContent = "Correct";
+
+                    rationaleBox.className = "mt-4 p-4 rounded-lg text-xs leading-relaxed bg-emerald-950/20 border border-emerald-500/30 text-emerald-300";
+                    rationaleBox.innerHTML = `<strong>Rationale:</strong> ${q.rationale}`;
+                } else {
+                    card.className = "bg-slate-900 border-2 border-rose-500/40 rounded-xl p-6 shadow-md";
+                    itemBadge.className = "text-xs px-2.5 py-1 rounded font-bold bg-rose-500/20 text-rose-400 border border-rose-500/40";
+                    itemBadge.textContent = "Incorrect";
+
+                    rationaleBox.className = "mt-4 p-4 rounded-lg text-xs leading-relaxed bg-rose-950/20 border border-rose-500/30 text-rose-300";
+                    rationaleBox.innerHTML = `<strong>Rationale:</strong> ${q.rationale}`;
+                }
+            });
+
+            updateLiveScore(true);
+
+            // Change Submit Button UI
+            const submitBtn = document.getElementById('submit-btn');
+            submitBtn.textContent = "Exam Completed";
+            submitBtn.className = "px-6 py-3 bg-slate-800 text-slate-500 cursor-not-allowed font-bold text-sm rounded-xl border border-slate-700";
+            submitBtn.onclick = null;
+        }
+
+        // Reset Exam
+        function resetExam() {
+            if (confirm("Are you sure you want to reset all your answers?")) {
+                userAnswers = new Array(questions.length).fill(null);
+                isSubmitted = false;
+                renderQuestions();
+                updateLiveScore(false);
+
+                const statusBadge = document.getElementById('status-badge');
+                statusBadge.classList.add('hidden');
+
+                const submitBtn = document.getElementById('submit-btn');
+                submitBtn.textContent = "Submit Exam";
+                submitBtn.className = "px-6 py-3 bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-400 hover:to-sky-500 text-white font-bold text-sm rounded-xl shadow-lg transition transform active:scale-95";
+                submitBtn.onclick = gradeExam;
+            }
+        }
+
+        // Initialize Application
+        window.addEventListener('DOMContentLoaded', () => {
+            renderQuestions();
+        });
+    </script>
+</body>
+</html>

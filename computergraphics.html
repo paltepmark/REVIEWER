@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Graphics Exam & Web Reviewer</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent-primary: #38bdf8;
+            --accent-success: #22c55e;
+            --accent-error: #ef4444;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --code-bg: #090d16;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: var(--accent-primary);
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        p.subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn.active {
+            background-color: var(--accent-primary);
+            color: #0f172a;
+        }
+
+        .tab-btn:hover:not(.active) {
+            background-color: var(--card-bg);
+            color: var(--text-main);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Reviewer Styles */
+        .section-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .section-card h2 {
+            color: var(--accent-primary);
+            margin-bottom: 16px;
+            font-size: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-top: 15px;
+        }
+
+        .info-box {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .info-box h3 {
+            color: #e2e8f0;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background: var(--code-bg);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: #1e293b;
+            color: var(--accent-primary);
+        }
+
+        .color-swatch {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            vertical-align: middle;
+            margin-right: 8px;
+            border: 1px solid #ffffff33;
+        }
+
+        /* Exam Styles */
+        .question-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .q-number {
+            color: var(--accent-primary);
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .q-text {
+            font-size: 1.05rem;
+            margin-bottom: 16px;
+        }
+
+        .options-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid var(--border-color);
+            padding: 12px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .option-label:hover {
+            border-color: var(--accent-primary);
+            background: rgba(56, 189, 248, 0.05);
+        }
+
+        .option-label input[type="radio"] {
+            margin-right: 12px;
+            accent-color: var(--accent-primary);
+        }
+
+        .rationale {
+            display: none;
+            margin-top: 15px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+        }
+
+        .rationale.correct-bg {
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid var(--accent-success);
+            color: #4ade80;
+        }
+
+        .rationale.incorrect-bg {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid var(--accent-error);
+            color: #f87171;
+        }
+
+        .exam-controls {
+            position: sticky;
+            bottom: 20px;
+            background: var(--card-bg);
+            padding: 16px 24px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            margin-top: 30px;
+        }
+
+        .btn-submit {
+            background: var(--accent-primary);
+            color: #0f172a;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-submit:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .score-display {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        code {
+            background: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: var(--accent-primary);
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>IT2202: Computer Graphics Reviewer</h1>
+        <p class="subtitle">Interactive Web-Based Study Guide & 50-Item Mock Exam</p>
+    </header>
+
+    <div class="nav-tabs">
+        <button class="tab-btn active" onclick="switchTab('reviewer')">Core Notes Reviewer</button>
+        <button class="tab-btn" onclick="switchTab('exam')">50-Item Mock Exam</button>
+    </div>
+
+    <!-- REVIEWER TAB CONTENT -->
+    <div id="reviewer" class="tab-content active">
+        <div class="section-card">
+            <h2>1. Major Areas & Core Definitions</h2>
+            <div class="grid-2">
+                <div class="info-box">
+                    <h3>Modeling</h3>
+                    <p>Mathematical specification of shape and appearance properties stored on a computer.</p>
+                </div>
+                <div class="info-box">
+                    <h3>Rendering</h3>
+                    <p>Creation of shaded 2D raster images from 3D computer models.</p>
+                </div>
+                <div class="info-box">
+                    <h3>Animation</h3>
+                    <p>Creating an illusion of motion via a rapid sequence of images (frames) measured in FPS.</p>
+                </div>
+                <div class="info-box">
+                    <h3>Raster & Resolution</h3>
+                    <p>A 2D grid of pixels. <strong>Resolution</strong> = total pixels; <strong>Precision</strong> = bits used per pixel.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <h2>2. RGB Color Mapping Reference</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Color Name</th>
+                        <th>R Value</th>
+                        <th>G Value</th>
+                        <th>B Value</th>
+                        <th>Visual Swatch</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Red</td><td>1.0</td><td>0.0</td><td>0.0</td><td><span class="color-swatch" style="background: rgb(255,0,0);"></span></td></tr>
+                    <tr><td>Green</td><td>0.0</td><td>1.0</td><td>0.0</td><td><span class="color-swatch" style="background: rgb(0,255,0);"></span></td></tr>
+                    <tr><td>Blue</td><td>0.0</td><td>0.0</td><td>1.0</td><td><span class="color-swatch" style="background: rgb(0,0,255);"></span></td></tr>
+                    <tr><td>Yellow</td><td>1.0</td><td>1.0</td><td>0.0</td><td><span class="color-swatch" style="background: rgb(255,255,0);"></span></td></tr>
+                    <tr><td>Cyan</td><td>0.0</td><td>1.0</td><td>1.0</td><td><span class="color-swatch" style="background: rgb(0,255,255);"></span></td></tr>
+                    <tr><td>Violet</td><td>0.5</td><td>0.0</td><td>1.0</td><td><span class="color-swatch" style="background: rgb(128,0,255);"></span></td></tr>
+                    <tr><td>Orange</td><td>0.5</td><td>1.0</td><td>0.0</td><td><span class="color-swatch" style="background: rgb(128,255,0);"></span></td></tr>
+                    <tr><td>Pink</td><td>0.5</td><td>1.0</td><td>0.5</td><td><span class="color-swatch" style="background: rgb(128,255,128);"></span></td></tr>
+                    <tr><td>Brown</td><td>0.5</td><td>0.2</td><td>0.0</td><td><span class="color-swatch" style="background: rgb(128,51,0);"></span></td></tr>
+                    <tr><td>White</td><td>1.0</td><td>1.0</td><td>1.0</td><td><span class="color-swatch" style="background: rgb(255,255,255);"></span></td></tr>
+                    <tr><td>Black</td><td>0.0</td><td>0.0</td><td>0.0</td><td><span class="color-swatch" style="background: rgb(0,0,0);"></span></td></tr>
+                    <tr><td>Gray</td><td>0.5</td><td>0.5</td><td>0.5</td><td><span class="color-swatch" style="background: rgb(128,128,128);"></span></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section-card">
+            <h2>3. Framebuffer & GPU Architecture</h2>
+            <div class="grid-2">
+                <div class="info-box">
+                    <h3>Color Buffer</h3>
+                    <p>Minimum required buffer storing RGB color intensity values for each pixel.</p>
+                </div>
+                <div class="info-box">
+                    <h3>Depth Buffer (Z-Buffer)</h3>
+                    <p>Stores distance values from scene objects to the camera to determine visibility and occlusion.</p>
+                </div>
+                <div class="info-box">
+                    <h3>Stencil Buffer</h3>
+                    <p>Holds pixel values for generating special effects like shadows, reflections, and portal rendering.</p>
+                </div>
+                <div class="info-box">
+                    <h3>APIs & Shader Languages</h3>
+                    <p><strong>DirectX:</strong> HLSL (Microsoft)<br><strong>Metal:</strong> Metal Shading Language (Apple)<br><strong>OpenGL:</strong> GLSL (Cross-platform)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <h2>4. The 4 OpenGL Pipeline Stages</h2>
+            <div class="info-box" style="margin-bottom: 12px;">
+                <h3>1. Application Stage (CPU)</h3>
+                <p>Initializes window, reads assets, creates VBOs/VAOs, loads shaders, and passes uniform values.</p>
+            </div>
+            <div class="info-box" style="margin-bottom: 12px;">
+                <h3>2. Geometry Processing (GPU - Vertex Shader)</h3>
+                <p>Applies transformations (Model &rarr; World, View &rarr; Camera, Projection &rarr; Clip Space) to transform 3D vertices.</p>
+            </div>
+            <div class="info-box" style="margin-bottom: 12px;">
+                <h3>3. Rasterization Stage (GPU)</h3>
+                <p>Performs primitive assembly (points, lines, triangles) and identifies which pixels belong to the primitive, creating fragments.</p>
+            </div>
+            <div class="info-box">
+                <h3>4. Pixel Processing (GPU - Fragment Shader)</h3>
+                <p>Computes the final color of each fragment using textures, uniforms, lights, and vertex colors.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MOCK EXAM TAB CONTENT -->
+    <div id="exam" class="tab-content">
+        <form id="quiz-form">
+            <div id="questions-container"></div>
+            <div class="exam-controls">
+                <div class="score-display" id="score-text">Score: -- / 50</div>
+                <button type="button" class="btn-submit" onclick="gradeQuiz()">Submit Exam</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    const quizData = [
+        {
+            q: "Which area of computer graphics is concerned with the mathematical specification of shape and appearance properties?",
+            options: ["Rendering", "Modeling", "Animation", "Rasterization"],
+            correct: 1,
+            rationale: "Modeling deals with the mathematical specification of shape and appearance stored on a computer."
+        },
+        {
+            q: "Which term describes the creation of shaded images from 3D computer models?",
+            options: ["Modeling", "Animation", "Rendering", "Primitive Assembly"],
+            correct: 2,
+            rationale: "Rendering is the process of generating a shaded 2D image from 3D scene models."
+        },
+        {
+            q: "What technique produces an illusion of motion through a rapid sequence of static images?",
+            options: ["Rasterization", "Animation", "Modeling", "Clipping"],
+            correct: 1,
+            rationale: "Animation creates motion illusions via sequential frames."
+        },
+        {
+            q: "What is a 2D array of pixels displayed on a screen called?",
+            options: ["Buffer", "Raster", "Shader", "Primitive"],
+            correct: 1,
+            rationale: "A raster is a 2D grid/array of picture elements (pixels)."
+        },
+        {
+            q: "In RGB representation, floating-point color values range between which two numbers?",
+            options: ["-1.0 and 1.0", "0 and 255", "0.0 and 1.0", "0.0 and 100.0"],
+            correct: 2,
+            rationale: "In computer graphics standards (like OpenGL), RGB triples are floating-point numbers between 0 and 1."
+        },
+        {
+            q: "What color is represented by the RGB triple (0.5, 1.0, 0.0)?",
+            options: ["Yellow", "Orange", "Pink", "Cyan"],
+            correct: 1,
+            rationale: "As specified in Handout 1, RGB (0.5, 1, 0) corresponds to Orange."
+        },
+        {
+            q: "What color is represented by the RGB triple (0.5, 1.0, 0.5)?",
+            options: ["Violet", "Cyan", "Pink", "Brown"],
+            correct: 2,
+            rationale: "RGB (0.5, 1, 0.5) corresponds to Pink."
+        },
+        {
+            q: "What color is represented by the RGB triple (0.5, 0.0, 1.0)?",
+            options: ["Violet", "Cyan", "Brown", "Gray"],
+            correct: 0,
+            rationale: "RGB (0.5, 0, 1) corresponds to Violet."
+        },
+        {
+            q: "What is the RGB value for Brown in the course reference?",
+            options: ["(0.5, 0.5, 0.5)", "(0.5, 0.2, 0.0)", "(1.0, 0.5, 0.0)", "(0.2, 0.5, 0.0)"],
+            correct: 1,
+            rationale: "Brown is explicitly defined as R=0.5, G=0.2, B=0.0."
+        },
+        {
+            q: "What is the total number of pixels in a raster called?",
+            options: ["Precision", "Resolution", "Framerate", "Aspect Ratio"],
+            correct: 1,
+            rationale: "Resolution refers to the total number of pixels in a raster."
+        },
+        {
+            q: "What term describes the number of bits used to represent each pixel?",
+            options: ["Resolution", "Precision", "Frequency", "Bandwidth"],
+            correct: 1,
+            rationale: "Precision determines color depth/number of bits allocated per pixel."
+        },
+        {
+            q: "Which buffer stores distances from scene objects to the virtual camera?",
+            options: ["Color Buffer", "Stencil Buffer", "Depth Buffer", "Texture Buffer"],
+            correct: 2,
+            rationale: "The depth buffer (Z-buffer) stores distance values relative to the camera to solve occlusion."
+        },
+        {
+            q: "At a minimum, what buffer must a framebuffer contain?",
+            options: ["Depth Buffer", "Stencil Buffer", "Color Buffer", "Frame Buffer"],
+            correct: 2,
+            rationale: "A framebuffer must contain at least a color buffer to hold output RGB pixel values."
+        },
+        {
+            q: "Which buffer is used to generate advanced graphical effects like shadows, reflections, and portal rendering?",
+            options: ["Depth Buffer", "Stencil Buffer", "Attribute Buffer", "Vertex Buffer"],
+            correct: 1,
+            rationale: "The stencil buffer stores values used for special rendering masking, such as shadows and portals."
+        },
+        {
+            q: "What unit of measurement is used for frame rate?",
+            options: ["BPS", "FPS", "Hz", "RPM"],
+            correct: 1,
+            rationale: "Frame rate is measured in Frames Per Second (FPS)."
+        },
+        {
+            q: "What programs are run directly by the GPU to execute rendering computations?",
+            options: ["Kernels", "Drivers", "Shaders", "Assemblies"],
+            correct: 2,
+            rationale: "GPU programs execution algorithms are called shaders."
+        },
+        {
+            q: "Which shader language and API pair is utilized on Microsoft platforms including Xbox?",
+            options: ["OpenGL & GLSL", "Metal API & MSL", "DirectX API & HLSL", "Vulkan & SPIR-V"],
+            correct: 2,
+            rationale: "DirectX API uses High-Level Shading Language (HLSL)."
+        },
+        {
+            q: "Which shading language is native to modern Mac computers, iPhones, and iPads?",
+            options: ["GLSL", "HLSL", "Metal Shading Language", "Cg"],
+            correct: 2,
+            rationale: "Apple hardware utilizes the Metal API & Metal Shading Language."
+        },
+        {
+            q: "What is the cross-platform graphics API widely adopted across various systems?",
+            options: ["DirectX", "OpenGL", "Metal", "GDI+"],
+            correct: 1,
+            rationale: "OpenGL (Open Graphics Library) is a cross-platform graphics API standard."
+        },
+        {
+            q: "How many stages make up the pipeline model used in OpenGL?",
+            options: ["3", "4", "5", "6"],
+            correct: 1,
+            rationale: "The OpenGL pipeline consists of 4 stages: Application, Geometry Processing, Rasterization, Pixel Processing."
+        },
+        {
+            q: "Which stage of the graphics pipeline primarily executes on the CPU?",
+            options: ["Application", "Geometry Processing", "Rasterization", "Pixel Processing"],
+            correct: 0,
+            rationale: "Stage 1 (Application) executes on the CPU to setup windows and send data."
+        },
+        {
+            q: "In interactive and animated applications, what frame rate is the main application loop typically targeting?",
+            options: ["24 FPS", "30 FPS", "60 FPS", "120 FPS"],
+            correct: 2,
+            rationale: "Handout 1 notes interactive loops usually aim for a rate of 60 FPS."
+        },
+        {
+            q: "Where are vertex attribute data stored in GPU memory?",
+            options: ["Texture Buffers", "Vertex Buffer Objects (VBOs)", "Vertex Array Objects (VAOs)", "Framebuffers"],
+            correct: 1,
+            rationale: "Vertex attribute data is stored in GPU memory buffers called VBOs."
+        },
+        {
+            q: "Which GPU construct stores and manages sets of associations between VBO attributes and shader variables?",
+            options: ["Vertex Array Objects (VAOs)", "Depth Buffers", "Uniform Objects", "Stencil Buffers"],
+            correct: 0,
+            rationale: "VAOs store and manage associations between attributes in VBOs and shader variables."
+        },
+        {
+            q: "What program is responsible for implementing the Geometry Processing stage?",
+            options: ["Fragment Shader", "Vertex Shader", "Rasterizer", "Application Loop"],
+            correct: 1,
+            rationale: "Geometry Processing is executed by the vertex shader."
+        },
+        {
+            q: "What is a collection of points grouped into lines or triangles that defines a 3D shape called?",
+            options: ["Buffer", "Mesh", "Raster", "Texture"],
+            correct: 1,
+            rationale: "A mesh is a collection of points grouped into lines/triangles defining an object shape."
+        },
+        {
+            q: "Which vertex attribute indicates the direction perpendicular to a surface for lighting calculations?",
+            options: ["UV Coordinate", "Normal Vector", "Color Triple", "Position Vector"],
+            correct: 1,
+            rationale: "A normal vector is perpendicular to a surface and used in lighting models."
+        },
+        {
+            q: "Which coordinate transformation translates, rotates, and scales an object relative to the center of the scene?",
+            options: ["View Transformation", "Projection Transformation", "Model Transformation", "Viewport Transformation"],
+            correct: 2,
+            rationale: "Model transformation moves objects from object local space into World Space."
+        },
+        {
+            q: "Coordinates transformed in front of the user's virtual camera reside in which space?",
+            options: ["World Space", "View Space", "Clip Space", "Screen Space"],
+            correct: 1,
+            rationale: "View space (or camera/eye space) represents coordinates relative to camera orientation."
+        },
+        {
+            q: "Points falling outside the specified viewing volume are discarded during projection in which space?",
+            options: ["World Space", "Model Space", "Clip Space", "View Space"],
+            correct: 2,
+            rationale: "Clipping occurs in Clip Space following projection transformation."
+        },
+        {
+            q: "What is the process of grouping points into geometric primitives (points, lines, triangles) called?",
+            options: ["Rasterization", "Primitive Assembly", "Interpolation", "Fragment Generation"],
+            correct: 1,
+            rationale: "Primitive assembly is the step during rasterization where vertices are grouped into primitives."
+        },
+        {
+            q: "What is a collection of data used to determine the final color of a single pixel called?",
+            options: ["Vertex", "Fragment", "Buffer", "Mesh"],
+            correct: 1,
+            rationale: "A fragment is a data collection evaluated to compute pixel color."
+        },
+        {
+            q: "Which program is applied to each fragment during the Pixel Processing stage?",
+            options: ["Vertex Shader", "Geometry Shader", "Fragment Shader", "Rasterizer"],
+            correct: 2,
+            rationale: "The fragment shader calculates the final color of each fragment."
+        },
+        {
+            q: "What method in Pygame is used to set up the display window size?",
+            options: ["pygame.window.create()", "pygame.display.set_mode()", "pygame.screen.init()", "pygame.graphics.set_window()"],
+            correct: 1,
+            rationale: "pygame.display.set_mode((width, height)) initializes the screen window."
+        },
+        {
+            q: "What are the three substages of an interactive application's Main Loop?",
+            options: ["Start, Process, Close", "Process Input, Update, Render", "Load, Calculate, Draw", "Init, Run, Shutdown"],
+            correct: 1,
+            rationale: "Main loop repeats 3 steps: Process Input, Update, and Render."
+        },
+        {
+            q: "Which function must every GLSL shader program contain?",
+            options: ["init()", "render()", "main()", "start()"],
+            correct: 2,
+            rationale: "Every shader program in GLSL must contain a void main() function."
+        },
+        {
+            q: "What built-in GLSL variable holds the transformed position of the vertex in a vertex shader?",
+            options: ["gl_VertexPosition", "gl_Position", "gl_FragColor", "gl_CoordPosition"],
+            correct: 1,
+            rationale: "gl_Position is the standard built-in GLSL variable for output vertex positions."
+        },
+        {
+            q: "In a GLSL vec4(x, y, z, w), what is the primary purpose of the 'w' component?",
+            options: ["Alpha transparency", "Manipulate clipping/perspective division", "Specular reflectivity", "Z-buffer offset"],
+            correct: 1,
+            rationale: "The fourth parameter (w) is used to manipulate perspective clipping in 3D space."
+        },
+        {
+            q: "What OpenGL legacy call sequence encapsulates vertex definitions when drawing primitives directly?",
+            options: ["glStart() and glStop()", "glBegin() and glEnd()", "glInit() and glClose()", "glDraw() and glFlush()"],
+            correct: 1,
+            rationale: "Legacy OpenGL specifies vertices between glBegin() and glEnd()."
+        },
+        {
+            q: "What qualifier is used to declare global variables in shaders that remain constant for all vertices/fragments of a shape?",
+            options: ["attribute", "varying", "uniform", "static"],
+            correct: 2,
+            rationale: "Uniform variables are global shader variables constant across draw calls."
+        },
+        {
+            q: "Which OpenGL function retrieves the reference location of a uniform variable?",
+            options: ["glGetUniformLocation()", "glFetchUniform()", "glGetUniformID()", "glBindUniform()"],
+            correct: 0,
+            rationale: "glGetUniformLocation(programRef, variableName) returns the location reference."
+        },
+        {
+            q: "What value does glGetUniformLocation return if the specified uniform variable name is not declared or used?",
+            options: ["0", "NULL", "-1", "999"],
+            correct: 2,
+            rationale: "If the uniform variable is missing or unused, glGetUniformLocation returns -1."
+        },
+        {
+            q: "An event that happens once at an isolated point in time is classified as:",
+            options: ["Continuous event", "Discrete event", "Uniform event", "Transient event"],
+            correct: 1,
+            rationale: "A discrete event occurs once at an isolated instant (e.g., key down)."
+        },
+        {
+            q: "Holding down a key to move a player across the screen continuous over an interval is an example of a:",
+            options: ["Discrete action", "Continuous action", "Static event", "Uniform action"],
+            correct: 1,
+            rationale: "Continuous actions persist over a span of time while an input state is maintained."
+        },
+        {
+            q: "Which Pygame event type detects the precise moment a keyboard key is released?",
+            options: ["pygame.KEYDOWN", "pygame.KEYUP", "pygame.KEYRELEASE", "pygame.KEYFREE"],
+            correct: 1,
+            rationale: "pygame.KEYUP triggers specifically when a key is released."
+        },
+        {
+            q: "Texture coordinates mapped to vertices in a shader are frequently referred to as:",
+            options: ["XY coordinates", "UV coordinates", "ST coordinates", "Normal coordinates"],
+            correct: 1,
+            rationale: "Texture mapping coordinates are standardly called UV coordinates."
+        },
+        {
+            q: "What is the primary output of the Rasterization stage?",
+            options: ["Transformed Vertices", "Fragments", "Image Files", "3D Meshes"],
+            correct: 1,
+            rationale: "Rasterization takes geometric primitives and produces fragments corresponding to pixel grid locations."
+        },
+        {
+            q: "In GLSL, what vector data type represents three floating-point components?",
+            options: ["float3", "vec3", "vector3D", "triFloat"],
+            correct: 1,
+            rationale: "In GLSL, vec3 represents a 3-component floating point vector."
+        },
+        {
+            q: "During which phase of a windowed graphics application are textures and shaders loaded into memory?",
+            options: ["Startup Phase", "Update Substage", "Render Substage", "Shutdown Phase"],
+            correct: 0,
+            rationale: "Resources, textures, and shader files are loaded during the Startup Phase."
+        },
+        {
+            q: "In world space, where is the origin (0,0,0) located?",
+            options: ["At the camera position", "At the center of the scene", "At the top-left corner of the window", "At the bottom-right corner"],
+            correct: 1,
+            rationale: "In world space, the origin is situated at the center of the overall scene."
+        }
+    ];
+
+    function switchTab(tabId) {
+        document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+        
+        document.getElementById(tabId).classList.add('active');
+        event.target.classList.add('active');
+    }
+
+    function renderQuestions() {
+        const container = document.getElementById('questions-container');
+        container.innerHTML = quizData.map((item, idx) => `
+            <div class="question-card" id="q-card-${idx}">
+                <div class="q-number">Question ${idx + 1} of 50</div>
+                <div class="q-text">${item.q}</div>
+                <div class="options-group">
+                    ${item.options.map((opt, optIdx) => `
+                        <label class="option-label">
+                            <input type="radio" name="q${idx}" value="${optIdx}">
+                            ${opt}
+                        </label>
+                    `).join('')}
+                </div>
+                <div class="rationale" id="rationale-${idx}"></div>
+            </div>
+        `).join('');
+    }
+
+    function gradeQuiz() {
+        let score = 0;
+        quizData.forEach((item, idx) => {
+            const selected = document.querySelector(`input[name="q${idx}"]:checked`);
+            const rationaleEl = document.getElementById(`rationale-${idx}`);
+            
+            if (selected) {
+                const userAns = parseInt(selected.value);
+                if (userAns === item.correct) {
+                    score++;
+                    rationaleEl.className = "rationale correct-bg";
+                    rationaleEl.innerHTML = `<strong>Correct!</strong> ${item.rationale}`;
+                } else {
+                    rationaleEl.className = "rationale incorrect-bg";
+                    rationaleEl.innerHTML = `<strong>Incorrect.</strong> Correct answer: <em>${item.options[item.correct]}</em>.<br>${item.rationale}`;
+                }
+            } else {
+                rationaleEl.className = "rationale incorrect-bg";
+                rationaleEl.innerHTML = `<strong>Unanswered.</strong> Correct answer: <em>${item.options[item.correct]}</em>.<br>${item.rationale}`;
+            }
+            rationaleEl.style.display = "block";
+        });
+
+        const scoreText = document.getElementById('score-text');
+        scoreText.innerText = `Score: ${score} / 50 (${Math.round((score/50)*100)}%)`;
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+
+    // Initialize Questions on Load
+    renderQuestions();
+</script>
+</body>
+</html>
