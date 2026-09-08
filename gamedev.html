@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GAMEDEV Study Reviewer & Interactive Exam</title>
+    <title>IT2012: Platforms, Player Modes, Goals & Genres - Reviewer & Exam</title>
     <style>
         :root {
             --bg-color: #0f172a;
             --card-bg: #1e293b;
-            --accent-color: #38bdf8;
-            --accent-hover: #0284c7;
-            --text-color: #f8fafc;
+            --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --correct-color: #22c55e;
+            --accent: #38bdf8;
+            --accent-hover: #0284c7;
+            --border: #334155;
             --correct-bg: rgba(34, 197, 94, 0.15);
-            --incorrect-color: #ef4444;
+            --correct-border: #22c55e;
             --incorrect-bg: rgba(239, 68, 68, 0.15);
-            --border-color: #334155;
+            --incorrect-border: #ef4444;
         }
 
         * {
@@ -28,14 +28,14 @@
 
         body {
             background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
+            color: var(--text-main);
             padding-bottom: 90px;
+            line-height: 1.6;
         }
 
         header {
             background-color: var(--card-bg);
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border);
             padding: 1.5rem;
             text-align: center;
             position: sticky;
@@ -44,38 +44,46 @@
         }
 
         header h1 {
-            color: var(--accent-color);
-            margin-bottom: 0.5rem;
-            font-size: 1.8rem;
+            color: var(--accent);
+            font-size: 1.6rem;
+            margin-bottom: 0.2rem;
         }
 
-        nav {
+        header p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .tab-nav {
             display: flex;
             justify-content: center;
             gap: 1rem;
-            margin-top: 1rem;
+            background-color: var(--card-bg);
+            padding: 0.5rem 1rem;
+            border-bottom: 1px solid var(--border);
         }
 
         .tab-btn {
-            background-color: transparent;
+            background: none;
+            border: none;
             color: var(--text-muted);
-            border: 2px solid var(--border-color);
-            padding: 0.6rem 1.2rem;
-            border-radius: 8px;
-            cursor: pointer;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
             font-weight: 600;
+            cursor: pointer;
+            border-radius: 6px;
             transition: all 0.2s ease;
         }
 
         .tab-btn:hover {
-            color: var(--text-color);
-            border-color: var(--accent-color);
+            color: var(--text-main);
+            background-color: rgba(255, 255, 255, 0.05);
         }
 
         .tab-btn.active {
-            background-color: var(--accent-color);
-            color: var(--bg-color);
-            border-color: var(--accent-color);
+            color: var(--accent);
+            background-color: rgba(56, 189, 248, 0.1);
+            border-bottom: 2px solid var(--accent);
         }
 
         .container {
@@ -92,96 +100,63 @@
             display: block;
         }
 
-        /* Reviewer Styling */
+        /* Reviewer Cards Styling */
         .section-title {
-            color: var(--accent-color);
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 0.5rem;
+            color: var(--accent);
+            font-size: 1.4rem;
             margin: 2rem 0 1rem 0;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
         }
 
-        .grid-container {
+        .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.2rem;
-            margin-bottom: 2rem;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .card {
             background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 1.2rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.25rem;
         }
 
         .card h3 {
-            color: var(--accent-color);
+            color: var(--accent);
             margin-bottom: 0.5rem;
             font-size: 1.1rem;
         }
 
         .card p, .card ul {
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             color: var(--text-muted);
         }
 
         .card ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-
-        .card ul li {
-            margin-bottom: 0.4rem;
-            position: relative;
             padding-left: 1.2rem;
+            margin-top: 0.5rem;
         }
 
-        .card ul li::before {
-            content: "•";
-            color: var(--accent-color);
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1rem 0;
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        th, td {
-            padding: 0.8rem 1rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border-color);
-            font-size: 0.95rem;
-        }
-
-        th {
-            background-color: rgba(56, 189, 248, 0.1);
-            color: var(--accent-color);
-        }
-
-        /* Exam Styling */
+        /* Interactive Exam Styling */
         .question-card {
             background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
             padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.25rem;
+            transition: border-color 0.2s ease;
         }
 
-        .question-title {
+        .question-text {
             font-size: 1.05rem;
             font-weight: 600;
             margin-bottom: 1rem;
         }
 
         .options-list {
+            list-style: none;
             display: flex;
             flex-direction: column;
             gap: 0.6rem;
@@ -190,52 +165,51 @@
         .option-label {
             display: flex;
             align-items: center;
-            padding: 0.8rem 1rem;
-            border: 1px solid var(--border-color);
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border);
             border-radius: 6px;
             cursor: pointer;
-            transition: background-color 0.2s;
+            background-color: rgba(255, 255, 255, 0.02);
+            transition: background 0.2s;
             font-size: 0.95rem;
         }
 
         .option-label:hover {
-            background-color: rgba(255, 255, 255, 0.05);
+            background-color: rgba(56, 189, 248, 0.05);
+            border-color: var(--accent);
         }
 
         .option-label input[type="radio"] {
-            margin-right: 0.8rem;
-            accent-color: var(--accent-color);
+            accent-color: var(--accent);
+            width: 16px;
+            height: 16px;
         }
 
         .explanation {
             display: none;
             margin-top: 1rem;
-            padding: 0.8rem 1rem;
+            padding: 0.85rem 1rem;
             border-radius: 6px;
             font-size: 0.9rem;
-            border-left: 4px solid var(--accent-color);
-            background-color: rgba(255, 255, 255, 0.03);
+            line-height: 1.4;
         }
 
-        /* Feedback states after submission */
+        /* Post-Exam States */
         .question-card.correct {
-            border-color: var(--correct-color);
+            border-color: var(--correct-border);
+            background-color: var(--correct-bg);
         }
 
         .question-card.incorrect {
-            border-color: var(--incorrect-color);
-        }
-
-        .option-label.correct-option {
-            background-color: var(--correct-bg);
-            border-color: var(--correct-color);
-            color: #4ade80;
-        }
-
-        .option-label.incorrect-option {
+            border-color: var(--incorrect-border);
             background-color: var(--incorrect-bg);
-            border-color: var(--incorrect-color);
-            color: #f87171;
+        }
+
+        .explanation.visible {
+            display: block;
+            background-color: rgba(15, 23, 42, 0.8);
+            border-left: 4px solid var(--accent);
         }
 
         /* Sticky Control Bar */
@@ -243,50 +217,67 @@
             position: fixed;
             bottom: 0;
             left: 0;
-            width: 100%;
+            right: 0;
             background-color: var(--card-bg);
-            border-top: 1px solid var(--border-color);
-            padding: 1rem 2rem;
+            border-top: 1px solid var(--border);
+            padding: 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5);
-            z-index: 100;
+            z-index: 1000;
+            box-shadow: 0 -4px 12px rgba(0,0,0,0.3);
         }
 
         .score-display {
             font-size: 1.1rem;
-            font-weight: 600;
+            font-weight: bold;
+            color: var(--text-main);
         }
 
         .score-display span {
-            color: var(--accent-color);
+            color: var(--accent);
         }
 
-        .action-btn {
-            background-color: var(--accent-color);
-            color: var(--bg-color);
+        .action-btns {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn {
+            background-color: var(--accent);
+            color: #0f172a;
             border: none;
-            padding: 0.8rem 1.8rem;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 1rem;
+            padding: 0.75rem 1.5rem;
+            font-weight: bold;
+            border-radius: 6px;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: background 0.2s;
         }
 
-        .action-btn:hover {
+        .btn:hover {
             background-color: var(--accent-hover);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.05);
         }
 
         @media (max-width: 600px) {
             .control-bar {
                 flex-direction: column;
-                gap: 0.8rem;
-                padding: 0.8rem 1rem;
+                gap: 0.75rem;
             }
-            body {
-                padding-bottom: 120px;
+            .action-btns {
+                width: 100%;
+            }
+            .btn {
+                flex: 1;
             }
         }
     </style>
@@ -294,282 +285,703 @@
 <body>
 
     <header>
-        <h1>Computer Graphics Reviewer & Exam</h1>
-        <nav>
-            <button class="tab-btn active" onclick="switchTab('reviewer')">Tab 1: Core Notes</button>
-            <button class="tab-btn" onclick="switchTab('exam')">Tab 2: Interactive Exam</button>
-        </nav>
+        <h1>IT2012 Interactive Study Reviewer</h1>
+        <p>Platforms, Player Modes, Time Intervals, Goals, and Game Genres</p>
     </header>
 
+    <nav class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab('reviewer')">Core Notes Reviewer</button>
+        <button class="tab-btn" onclick="switchTab('exam')">50-Item Mock Exam</button>
+    </nav>
+
     <div class="container">
-        <!-- TAB 1: CORE NOTES REVIEWER -->
+        <!-- TAB 1: REVIEWER -->
         <div id="reviewer" class="tab-content active">
-            <h2 class="section-title">Module 1: Core Concepts & Graphics Pipeline</h2>
             
-            <div class="grid-container">
+            <h2 class="section-title">1. Game Platforms</h2>
+            <div class="grid">
                 <div class="card">
-                    <h3>Primary Disciplines</h3>
-                    <ul>
-                        <li><b>Modeling:</b> Mathematical specification of shape and appearance properties.[span_0](start_span)[span_0](end_span)</li>
-                        <li><b>Rendering:</b> Creation of shaded images from 3D computer models.[span_1](start_span)[span_1](end_span)</li>
-                        <li><b>Animation:</b> Creating the illusion of motion via a sequence of static images.[span_2](start_span)[span_2](end_span)</li>
-                    </ul>
-                </div>
-
-                <div class="card">
-                    <h3>Raster & Display Fundamentals</h3>
-                    <ul>
-                        <li><b>Raster:</b> A 2D array of pixels displayed on screen.[span_3](start_span)[span_3](end_span)</li>
-                        <li><b>Resolution:</b> Total number of pixels in a raster.[span_4](start_span)[span_4](end_span)</li>
-                        <li><b>Precision:</b> Number of bits allocated per pixel.[span_5](start_span)[span_5](end_span)</li>
-                        <li><b>Frame Rate:</b> Image refresh frequency measured in Frames Per Second (FPS).[span_6](start_span)[span_6](end_span)</li>
-                    </ul>
-                </div>
-
-                <div class="card">
-                    <h3>Framebuffer Memory Buffers</h3>
-                    <ul>
-                        <li><b>Color Buffer:</b> Minimum required buffer; stores RGB color data.[span_7](start_span)[span_7](end_span)</li>
-                        <li><b>Depth Buffer (Z-Buffer):</b> Stores distance values to camera for visibility calculations.[span_8](start_span)[span_8](end_span)</li>
-                        <li><b>Stencil Buffer:</b> Used for advanced masking effects (shadows, reflections, portals).[span_9](start_span)[span_9](end_span)</li>
-                    </ul>
-                </div>
-            </div>
-
-            <h3 style="color: var(--accent-color); margin-bottom: 0.5rem;">RGB Color Value Reference Table</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Color</th>
-                        <th>RGB Triple (Normalized 0.0 – 1.0)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Orange</td><td>(0.5, 1, 0)[span_10](start_span)[span_10](end_span)</td></tr>
-                    <tr><td>Pink</td><td>(0.5, 1, 0.5)[span_11](start_span)[span_11](end_span)</td></tr>
-                    <tr><td>Violet</td><td>(0.5, 0, 1)[span_12](start_span)[span_12](end_span)</td></tr>
-                    <tr><td>Brown</td><td>(0.5, 0.2, 0)[span_13](start_span)[span_13](end_span)</td></tr>
-                </tbody>
-            </table>
-
-            <h3 style="color: var(--accent-color); margin: 1.5rem 0 0.5rem 0;">4-Stage OpenGL Pipeline</h3>
-            <div class="grid-container">
-                <div class="card">
-                    <h3>1. Application</h3>
-                    <p>Executes primarily on the CPU. Handles user input, application state, and target loops (e.g., 60 FPS).[span_14](start_span)[span_14](end_span)</p>
+                    <h3>Arcade</h3>
+                    <p>Stand-alone systems in public venues (malls/parks). Usually played standing up using buttons and joysticks.</p>
                 </div>
                 <div class="card">
-                    <h3>2. Geometry Processing</h3>
-                    <p>Executes on GPU via Vertex Shader. Handles vertex transformations, normal vectors, UV mapping, and space transforms.[span_15](start_span)[span_15](end_span)</p>
+                    <h3>Console</h3>
+                    <p>Home systems hooked to a TV. Proprietary platforms controlled by manufacturers (Sony, Microsoft, Nintendo).</p>
                 </div>
                 <div class="card">
-                    <h3>3. Rasterization</h3>
-                    <p>Converts geometric primitives into discrete pixel fragments through Primitive Assembly.[span_16](start_span)[span_16](end_span)</p>
+                    <h3>Computer</h3>
+                    <p>Played on PCs/laptops. Adds complexity due to non-standard setups and hardware variety.</p>
                 </div>
                 <div class="card">
-                    <h3>4. Pixel Processing</h3>
-                    <p>Executes on GPU via Fragment Shader. Computes final per-pixel colors and applies z-buffer depth testing.[span_17](start_span)[span_17](end_span)</p>
+                    <h3>Online</h3>
+                    <p>Played via Internet-connected PC or console. Large games use multiple servers for thousands of players.</p>
+                </div>
+                <div class="card">
+                    <h3>Handheld</h3>
+                    <p>Lightweight, portable system with built-in screen, controls, and speakers (playable almost anywhere).</p>
+                </div>
+                <div class="card">
+                    <h3>Mobile</h3>
+                    <p>Designed for smartphones/tablets. Has wide connectivity features for wireless multiplayer play.</p>
+                </div>
+                <div class="card">
+                    <h3>Tabletop</h3>
+                    <p>Played on tables using physical pieces: board, card, dice, and pen-and-paper games (e.g., Dungeons & Dragons).</p>
                 </div>
             </div>
 
-            <h2 class="section-title">Module 2: Pygame, Windows, & GLSL</h2>
-
-            <div class="grid-container">
+            <h2 class="section-title">2. Time Intervals & Pacing</h2>
+            <div class="grid">
                 <div class="card">
-                    <h3>Application Phases</h3>
-                    <ul>
-                        <li><b>Startup:</b> Application initialization and resource setup.[span_18](start_span)[span_18](end_span)</li>
-                        <li><b>Main Loop:</b> Repeating loop divided into:
-                            <ol style="margin-left: 1.2rem; margin-top: 0.3rem;">
-                                <li>Process Input[span_19](start_span)[span_19](end_span)</li>
-                                <li>Update State[span_20](start_span)[span_20](end_span)</li>
-                                <li>Render Frame[span_21](start_span)[span_21](end_span)</li>
-                            </ol>
-                        </li>
-                        <li><b>Shutdown:</b> Resource cleanup and termination.[span_22](start_span)[span_22](end_span)</li>
-                    </ul>
+                    <h3>Turn-Based</h3>
+                    <p>Players take discrete turns with usually unlimited time. Encourages reflective planning (e.g., board/card games).</p>
                 </div>
-
                 <div class="card">
-                    <h3>GLSL & Shader Basics</h3>
-                    <ul>
-                        <li><b>Main Entry:</b> Every GLSL shader program requires a <code>void main()</code> function.[span_23](start_span)[span_23](end_span)</li>
-                        <li><b>gl_Position:</b> Built-in GLSL output variable for vertex position (type <code>vec4</code>).[span_24](start_span)[span_24](end_span)</li>
-                        <li><b>Homogeneous Coordinates:</b> Default 4th component ($w$) value in <code>vec4</code> is <code>1.0</code>.[span_25](start_span)[span_25](end_span)</li>
-                        <li><b>Uniforms:</b> Global shader variables constant across all vertices/fragments during a draw call.[span_26](start_span)[span_26](end_span)</li>
-                    </ul>
+                    <h3>Real-Time</h3>
+                    <p>No turns or time intervals between moves. High-speed, reflexive gameplay; popular in online multiplayer.</p>
                 </div>
-
                 <div class="card">
-                    <h3>Event Handling Concepts</h3>
-                    <ul>
-                        <li><b>Discrete Event:</b> Isolated occurrence at a single point in time (e.g., <code>pygame.KEYDOWN</code>).[span_27](start_span)[span_27](end_span)</li>
-                        <li><b>Continuous Action:</b> Ongoing operation active across continuous frames (e.g., holding a movement key).[span_28](start_span)[span_28](end_span)</li>
-                        <li><b>glGetUniformLocation:</b> Returns <code>-1</code> if a requested uniform is unused or undeclared.[span_29](start_span)[span_29](end_span)</li>
-                    </ul>
+                    <h3>Time-Limited</h3>
+                    <p>Compromise between turn-based and real-time. Sets a strict countdown for individual turns or entire puzzle sessions.</p>
                 </div>
             </div>
+
+            <h2 class="section-title">3. Player Modes</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Single-Player</h3>
+                    <p>1 human player. Opponents or allies are AI characters / Non-Player Characters (NPCs).</p>
+                </div>
+                <div class="card">
+                    <h3>Two-Player</h3>
+                    <p>Head-to-head mode. 2 players play against each other or team up against common enemies.</p>
+                </div>
+                <div class="card">
+                    <h3>Local Multiplayer</h3>
+                    <p>Up to 4 players share the same physical space, same machine, and same screen with separate controllers.</p>
+                </div>
+                <div class="card">
+                    <h3>LAN-Based Multiplayer</h3>
+                    <p>Players connect via a Local Area Network. Separate screens/devices, same physical local area.</p>
+                </div>
+                <div class="card">
+                    <h3>Online Multiplayer</h3>
+                    <p>Players connect via the Internet across separate locations. Can support thousands of players at once.</p>
+                </div>
+                <div class="card">
+                    <h3>MMORPG Key Feature</h3>
+                    <p>Persists 24/7 online and typically uses a subscription-based monthly fee model.</p>
+                </div>
+            </div>
+
+            <h2 class="section-title">4. Game Development Goals</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Entertainment</h3>
+                    <p>Pure fun, stress relief, boredom alleviation, role-play, and problem-solving experience.</p>
+                </div>
+                <div class="card">
+                    <h3>Social</h3>
+                    <p>Facilitates social interaction between opponents or teammates (from 2 players to thousands in MMOs).</p>
+                </div>
+                <div class="card">
+                    <h3>Educational</h3>
+                    <p>Teaches through in-game knowledge acquisition (math, geography, reading, etc.).</p>
+                </div>
+                <div class="card">
+                    <h3>Recruitment & Training</h3>
+                    <p>Used by military, government (NASA/Air Force), and corporations for skills, navigation, and leadership training.</p>
+                </div>
+                <div class="card">
+                    <h3>Health & Fitness</h3>
+                    <p>Exergames (Wii Fit, Just Dance) and medical therapy (e.g., Re-Mission for cancer patients).</p>
+                </div>
+                <div class="card">
+                    <h3>Consciousness & Change</h3>
+                    <p>Raises awareness for social, political, or religious causes (poverty, climate change, human rights).</p>
+                </div>
+                <div class="card">
+                    <h3>Aesthetics & Creativity</h3>
+                    <p>Elicits creative expression or artistic sharing (e.g., WarioWare D.I.Y., Guitar Hero GHTunes).</p>
+                </div>
+                <div class="card">
+                    <h3>Marketing & Advertising</h3>
+                    <p>Includes <strong>Advergames</strong> (standalone brand ads) and <strong>Advertainment</strong> (branded interactive hangout sites).</p>
+                </div>
+            </div>
+
+            <h2 class="section-title">5. Primary Game Genres & Sub-genres</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Action</h3>
+                    <p>Focuses on player reaction time, reflex over reflection, snap judgments, and adrenaline rush.</p>
+                    <ul>
+                        <li><strong>Platformer:</strong> Dodge obstacles, jumping, item collection.</li>
+                        <li><strong>Shooter:</strong> Combat via guns/weapons (FPS = 1st person straight vision; 3rd person = wide perspective).</li>
+                        <li><strong>Racing:</strong> High-speed vehicle navigation on tracks.</li>
+                        <li><strong>Fighting:</strong> 1-on-1 side-view combat, average session ~90 secs.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Adventure & Hybrids</h3>
+                    <p>Storytelling, exploration, puzzle solving, and decoding. Usually turn-based/reflective.</p>
+                    <ul>
+                        <li><strong>Action-Adventure:</strong> Only hybrid genre universally recognized as its own distinct category. Blends fast reflex combat with story/puzzles.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Puzzle & Casino</h3>
+                    <p><strong>Puzzle:</strong> Solving puzzles without controlling a character, little/no story (e.g., Tetris).</p>
+                    <p><strong>Casino:</strong> Electronic versions of real gambling (poker, slots) driven by risk/addiction motivations.</p>
+                </div>
+                <div class="card">
+                    <h3>Role-Playing Games (RPGs)</h3>
+                    <p>Strong storylines + character progression (gaining XP, money, strength, equipment). Common theme: "Save the world".</p>
+                </div>
+                <div class="card">
+                    <h3>Simulations (Sims)</h3>
+                    <p>Replicates real-world systems and machines.</p>
+                    <ul>
+                        <li><strong>Vehicle Sims:</strong> Complex machinery/flight training.</li>
+                        <li><strong>Sports/Participatory Sims:</strong> Wish fulfillment, playing/coaching sports.</li>
+                        <li><strong>Process Sims (CMS):</strong> Constructive building/management (no enemy destruction).</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Strategy & MMOs</h3>
+                    <p><strong>Strategy:</strong> Derived from board games (chess). Managing limited resources (TBS = reflective decisions; RTS = time pressure & micromanagement/multitasking).</p>
+                    <p><strong>MMO:</strong> Massive online worlds (MMORPG, MMOFPS, MMORTS). Challenge: Player misbehavior/harassment.</p>
+                </div>
+            </div>
+
         </div>
 
-        <!-- TAB 2: INTERACTIVE MOCK EXAM -->
+        <!-- TAB 2: EXAM -->
         <div id="exam" class="tab-content">
-            <form id="exam-form">
-                <div id="questions-container"></div>
-            </form>
+            <div id="questions-container"></div>
         </div>
     </div>
 
-    <!-- Sticky Control Bar -->
-    <div class="control-bar" id="control-bar" style="display: none;">
-        <div class="score-display" id="score-display">
-            Score: <span>0 / 50 (0%)</span>
+    <!-- STICKY CONTROL BAR -->
+    <div class="control-bar">
+        <div class="score-display" id="score-display">Score: 0 / 50 (0%)</div>
+        <div class="action-btns">
+            <button class="btn btn-secondary" onclick="resetExam()">Reset Exam</button>
+            <button class="btn" id="submit-btn" onclick="submitExam()">Submit Exam</button>
         </div>
-        <button class="action-btn" id="submit-btn" onclick="submitExam()">Submit Exam</button>
     </div>
 
     <script>
-        const examData = [
-            { id: 1, q: "Which area of computer graphics deals with the mathematical specification of shape and appearance properties?", options: ["Rendering", "Modeling", "Animation", "Rasterization"], answer: 1, explanation: "Modeling involves the mathematical specification of shape and appearance properties stored on a computer." },
-            { id: 2, q: "Which process is responsible for creating shaded images from 3D computer models?", options: ["Modeling", "Animation", "Rendering", "Pipeline Assembly"], answer: 2, explanation: "Rendering deals with generating shaded 2D images from 3D models." },
-            { id: 3, q: "What technique creates the illusion of motion through a sequence of static images?", options: ["Rasterization", "Animation", "Modeling", "Clipping"], answer: 1, explanation: "Animation creates an illusion of motion via sequential images displayed quickly." },
-            { id: 4, q: "What is a 2D array of pixels displayed on a screen called?", options: ["Buffer", "Raster", "Shader", "Mesh"], answer: 1, explanation: "A raster is a 2D array/grid of pixels on a screen." },
-            { id: 5, q: "In RGB color representations for computer graphics, what range of values is used for each color channel?", options: ["0 to 255", "-1.0 to 1.0", "0.0 to 1.0", "0 to 100"], answer: 2, explanation: "Floating-point values between 0.0 and 1.0 represent color channel intensities." },
-            { id: 6, q: "Which RGB triple corresponds to the color Orange?", options: ["(1, 1, 0)", "(0.5, 1, 0)", "(0.5, 0.2, 0)", "(0.5, 1, 0.5)"], answer: 1, explanation: "The course materials explicitly list Orange as R=0.5, G=1, B=0." },
-            { id: 7, q: "Which RGB triple corresponds to the color Pink?", options: ["(0.5, 0, 1)", "(0, 1, 1)", "(0.5, 1, 0.5)", "(0.5, 0.5, 0.5)"], answer: 2, explanation: "Pink is specified as R=0.5, G=1, B=0.5." },
-            { id: 8, q: "What RGB values represent the color Violet?", options: ["(0.5, 0, 1)", "(0, 1, 1)", "(0.5, 0.2, 0)", "(1, 0, 1)"], answer: 0, explanation: "Violet is specified as R=0.5, G=0, B=1." },
-            { id: 9, q: "What color is represented by the RGB triple (0.5, 0.2, 0)?", options: ["Gray", "Brown", "Orange", "Violet"], answer: 1, explanation: "Brown corresponds to R=0.5, G=0.2, B=0." },
-            { id: 10, q: "What term refers to the total number of pixels in a raster?", options: ["Precision", "Resolution", "Frame rate", "Bandwidth"], answer: 1, explanation: "Resolution is the total number of pixels in the raster." },
-            { id: 11, q: "What term refers to the number of bits allocated per pixel in an image?", options: ["Resolution", "Precision", "Frame rate", "Depth"], answer: 1, explanation: "Precision is the number of bits used for each pixel." },
-            { id: 12, q: "Pixel data is stored in a region of memory known as the:", options: ["Framebuffer", "Central Processing Unit", "Vertex Buffer", "Stencil Memory"], answer: 0, explanation: "Pixel data resides in GPU memory known as the framebuffer." },
-            { id: 13, q: "At a minimum, what buffer must be contained within a framebuffer?", options: ["Depth buffer", "Stencil buffer", "Color buffer", "Texture buffer"], answer: 2, explanation: "A framebuffer must contain at least a color buffer storing RGB values." },
-            { id: 14, q: "Which buffer stores distances from scene points to the virtual camera to resolve object visibility?", options: ["Color buffer", "Depth buffer", "Stencil buffer", "Vertex buffer"], answer: 1, explanation: "Depth buffers store distance values from objects to the camera to handle visibility/occlusion." },
-            { id: 15, q: "Advanced visual effects such as shadows, reflections, or portal rendering often utilize which buffer?", options: ["Color buffer", "Depth buffer", "Stencil buffer", "Texture buffer"], answer: 2, explanation: "Stencil buffers store values used to generate effects like shadows, reflections, or portal rendering." },
-            { id: 16, q: "How is frame rate measured?", options: ["Bits per second (BPS)", "Hertz (Hz)", "Frames per second (FPS)", "Pixels per inch (PPI)"], answer: 2, explanation: "Frame rate measures the speed of displayed images in FPS." },
-            { id: 17, q: "Programs executed directly on the GPU to perform graphics computations are called:", options: ["Drivers", "Shaders", "Pipelines", "Buffers"], answer: 1, explanation: "GPU-executed programs that handle rendering computations are shaders." },
-            { id: 18, q: "Which API and shading language combination is native to Microsoft platforms like Xbox?", options: ["OpenGL & GLSL", "Metal API & Metal Shading Language", "DirectX API & HLSL", "Vulkan & SPIR-V"], answer: 2, explanation: "DirectX API uses HLSL on Microsoft platforms and Xbox consoles." },
-            { id: 19, q: "Which shading language runs on modern Mac computers, iPhones, and iPads?", options: ["HLSL", "GLSL", "Metal Shading Language", "Cg"], answer: 2, explanation: "Apple hardware uses Metal API and Metal Shading Language." },
-            { id: 20, q: "What is the most widely adopted cross-platform graphics API mentioned in the materials?", options: ["DirectX", "OpenGL", "Metal", "Pygame"], answer: 1, explanation: "OpenGL is the cross-platform, widely adopted graphics API." },
-            { id: 21, q: "How many stages exist in the pipeline model used in OpenGL?", options: ["3", "4", "5", "6"], answer: 1, explanation: "The OpenGL pipeline consists of Application, Geometry Processing, Rasterization, and Pixel Processing." },
-            { id: 22, q: "Which stage of the OpenGL pipeline executes primarily on the CPU?", options: ["Application", "Geometry Processing", "Rasterization", "Pixel Processing"], answer: 0, explanation: "The Application stage runs primarily on the CPU." },
-            { id: 23, q: "During interactive graphics application execution, what frame rate is typically targeted by the main loop?", options: ["24 FPS", "30 FPS", "60 FPS", "120 FPS"], answer: 2, explanation: "Interactive graphics application main loops typically aim for 60 FPS." },
-            { id: 24, q: "Vertex attributes are stored in GPU memory buffers called:", options: ["Vertex Array Objects (VAOs)", "Vertex Buffer Objects (VBOs)", "Texture Buffers", "Framebuffers"], answer: 1, explanation: "VBOs are GPU memory buffers that store vertex attributes." },
-            { id: 25, q: "What GPU object manages sets of associations between VBO attribute data and shader attribute variables?", options: ["Framebuffer Object", "Vertex Array Object (VAO)", "Stencil Buffer", "Uniform Buffer"], answer: 1, explanation: "VAOs manage sets of associations between VBO attribute data and shader variables." },
-            { id: 26, q: "Which program implements the Geometry Processing stage?", options: ["Fragment Shader", "Vertex Shader", "Application Loop", "Primitive Assembler"], answer: 1, explanation: "Geometry processing is implemented by the vertex shader." },
-            { id: 27, q: "What is a collection of points grouped into lines or triangles that defines an object's shape called?", options: ["Mesh", "Raster", "Fragment", "Pixel Array"], answer: 0, explanation: "A mesh is a collection of points grouped into lines or triangles defining shape." },
-            { id: 28, q: "Which vertex attribute vector is perpendicular to a surface and used in lighting calculations?", options: ["UV coordinate", "Tangent vector", "Normal vector", "Color vector"], answer: 2, explanation: "Normal vectors are perpendicular to surfaces and used in lighting calculations." },
-            { id: 29, q: "Texture coordinates indicating mapped points on an image are also known as:", options: ["XY coordinates", "UV coordinates", "Normal coordinates", "Model coordinates"], answer: 1, explanation: "Texture coordinates indicating points on an image mapped to vertices are UV coordinates." },
-            { id: 30, q: "Which spatial transformation translates, rotates, and scales an object with respect to world space?", options: ["View transformation", "Projection transformation", "Model transformation", "Screen transformation"], answer: 2, explanation: "Model transformations translate, rotate, and scale objects into world space." },
-            { id: 31, q: "Coordinates expressed relative to the user's camera view reside in:", options: ["World space", "View space", "Clip space", "Local space"], answer: 1, explanation: "World coordinates transformed relative to the user's view reside in view space." },
-            { id: 32, q: "Points located outside the specified viewing region are discarded or clipped in:", options: ["World space", "Clip space", "View space", "Model space"], answer: 1, explanation: "Coordinates outside the viewing region are clipped during projection in clip space." },
-            { id: 33, q: "What process groups vertices into primitives such as points, lines, or triangles during rasterization?", options: ["Primitive Assembly", "Pixel Processing", "Model Transformation", "Shader Compilation"], answer: 0, explanation: "The process of grouping points into geometric primitives is primitive assembly." },
-            { id: 34, q: "What is a collection of data used to calculate the color of a single pixel called?", options: ["Vertex", "Fragment", "Raster", "Mesh"], answer: 1, explanation: "A fragment is data evaluated to determine the color of a single pixel." },
-            { id: 35, q: "Which program calculates the final color of each fragment during Pixel Processing?", options: ["Vertex Shader", "Geometry Shader", "Fragment Shader", "Application Loop"], answer: 2, explanation: "The fragment shader calculates individual fragment colors during Pixel Processing." },
-            { id: 36, q: "What are the three main phases of a windowed interactive application?", options: ["Setup, Loop, End", "Startup, Main Loop, Shutdown", "Init, Render, Clear", "Load, Execute, Terminate"], answer: 1, explanation: "The three phases of a windowed interactive application." },
-            { id: 37, q: "What are the three substages contained within the Main Loop?", options: ["Read, Write, Delete", "Process Input, Update, Render", "Compile, Bind, Draw", "Keydown, Keyup, Display"], answer: 1, explanation: "The three repeating substages within the Main Loop." },
-            { id: 38, q: "Which Pygame method is used to initialize the screen dimensions of an application window?", options: ["pygame.window.init()", "pygame.display.set_mode()", "pygame.screen.create()", "pygame.graphics.set_window()"], answer: 1, explanation: "Used to set display window dimensions in Pygame." },
-            { id: 39, q: "What basic entry function must every GLSL shader program contain?", options: ["void main()", "int render()", "void draw()", "float start()"], answer: 0, explanation: "Every GLSL shader program must contain a void main() entry function." },
-            { id: 40, q: "Which built-in GLSL variable stores the output position of a vertex in the vertex shader?", options: ["gl_VertexPos", "gl_Position", "gl_FragColor", "gl_PointCoord"], answer: 1, explanation: "Built-in GLSL global variable used to assign current vertex position." },
-            { id: 41, q: "In GLSL vector data types, what does vec4 represent when used for positions?", options: ["Four integer positions", "Four float values representing x, y, z, and w", "A 4x4 matrix reference", "RGB and Depth parameters"], answer: 1, explanation: "vec4 consists of 4 floating-point components." },
-            { id: 42, q: "What is the default value of the fourth parameter (w) in gl_Position?", options: ["0.0", "0.5", "1.0", "-1.0"], answer: 2, explanation: "The default value of w in vertex positioning vectors is 1.0." },
-            { id: 43, q: "Which legacy OpenGL function call specifies the primitive type being drawn before defining vertices?", options: ["glBegin()", "glDrawArrays()", "glStartPrimitive()", "glVertexPointer()"], answer: 0, explanation: "Primitives are initiated with glBegin() passing the primitive type." },
-            { id: 44, q: "Which function defines individual vertex coordinates between legacy glBegin and glEnd calls?", options: ["glPoint3f()", "glVertex3f()", "glCoord3f()", "glVector3f()"], answer: 1, explanation: "Vertices are defined individually via glVertex3f() calls." },
-            { id: 45, q: "Global shader variables that remain constant while each shape is being drawn are declared using which qualifier?", options: ["attribute", "varying", "uniform", "const"], answer: 2, explanation: "Uniform variables are global shader variables constant per draw call." },
-            { id: 46, q: "Which OpenGL function is used to obtain a reference location of a uniform variable in a shader program?", options: ["glGetUniformLocation()", "glGetShaderUniform()", "glFindUniform()", "glBindUniformLocation()"], answer: 0, explanation: "Function used to get the location index of a uniform shader variable." },
-            { id: 47, q: "If a variable name passed to glGetUniformLocation() is not declared or used in the shader program, what value is returned?", options: ["0", "NULL", "-1", "1"], answer: 2, explanation: "If a uniform variable is undeclared or unused, glGetUniformLocation returns -1." },
-            { id: 48, q: "An event that occurs once at an isolated point in time is termed:", options: ["Continuous", "Discrete", "Uniform", "Static"], answer: 1, explanation: "Events happening once at an isolated point in time are discrete." },
-            { id: 49, q: "Holding down a movement key to continuously translate an object across the screen is an example of a:", options: ["Discrete event", "Continuous action", "Uniform operation", "Transient state"], answer: 1, explanation: "Actions occurring continuously over a time interval are continuous actions." },
-            { id: 50, q: "In Pygame event handling, which event type is raised at the instant a key is pressed down?", options: ["pygame.KEYUP", "pygame.KEYDOWN", "pygame.KEYPRESS", "pygame.KEYHOLD"], answer: 1, explanation: "Keydown events trigger at the isolated instant a key is pressed down." }
+        const rawExamData = [
+            {
+                q: "1. Which game platform features stand-alone systems located in public venues like malls and is usually played standing up?",
+                options: ["Console", "Arcade", "Tabletop", "Handheld"],
+                answer: 1,
+                explanation: "Arcade games are stand-alone systems found in public venues, usually played standing up with buttons or joysticks."
+            },
+            {
+                q: "2. Why are console platforms described as 'proprietary'?",
+                options: [
+                    "They can only be played in public arcades.",
+                    "Hardware manufacturers control what software is developed for them.",
+                    "They do not require a television set.",
+                    "They only allow open-source game development."
+                ],
+                answer: 1,
+                explanation: "Console platforms are proprietary because hardware manufacturers like Sony, Microsoft, and Nintendo exert control over software development."
+            },
+            {
+                q: "3. What adds complexity to game development on the computer platform?",
+                options: [
+                    "Lack of internet access",
+                    "Non-standard setups and a wide variety of hardware systems",
+                    "Mandatory subscription models",
+                    "Restriction to 2-player modes only"
+                ],
+                answer: 1,
+                explanation: "Computer platforms introduce complexity due to non-standard setups and diverse system configurations across PCs and laptops."
+            },
+            {
+                q: "4. A lightweight, portable gaming device with an integrated screen, controls, and speakers is a:",
+                options: ["Mobile Device", "Console", "Handheld Device", "Arcade Cabinet"],
+                answer: 2,
+                explanation: "Handheld devices are lightweight, portable consoles equipped with built-in screens, controls, and speakers."
+            },
+            {
+                q: "5. Dungeons & Dragons is categorized under which platform?",
+                options: ["Mobile", "Tabletop", "Handheld", "Console"],
+                answer: 1,
+                explanation: "Tabletop games include board, card, dice, and pen-and-paper games like Dungeons & Dragons."
+            },
+            {
+                q: "6. Which time interval allows players unlimited time during their turn to plan moves?",
+                options: ["Real-Time", "Time-Limited", "Turn-Based", "Asynchronous"],
+                answer: 2,
+                explanation: "Turn-based games allow each player a turn, typically with unlimited time to think and plan moves."
+            },
+            {
+                q: "7. In which time interval is there NO turn or delay between player actions?",
+                options: ["Real-Time", "Turn-Based", "Time-Limited", "Interval-Based"],
+                answer: 0,
+                explanation: "Real-time games have no turns or time intervals between actions; play happens continuously."
+            },
+            {
+                q: "8. A time-limited game acts as a compromise between which two time intervals?",
+                options: ["Turn-based and Real-time", "Real-time and Multi-turn", "Single-player and Multiplayer", "Local and Online"],
+                answer: 0,
+                explanation: "Time-limited games compromise between turn-based and real-time by placing explicit time limits on turns or games."
+            },
+            {
+                q: "9. In a single-player game, additional computer-controlled opponents are called:",
+                options: ["Local Players", "AI characters or NPCs", "Avatars", "Network Nodes"],
+                answer: 1,
+                explanation: "Non-human players in single-player games are powered by Artificial Intelligence (AI) or designed as Non-Player Characters (NPCs)."
+            },
+            {
+                q: "10. Which mode allows up to 4 players to share a physical room, machine, and screen using separate input devices?",
+                options: ["LAN-Based Multiplayer", "Online Multiplayer", "Local Multiplayer", "Two-Player Head-to-Head"],
+                answer: 2,
+                explanation: "Local multiplayer allows players in the same physical space to share a screen and machine with individual controllers."
+            },
+            {
+                q: "11. What distinguishes LAN-based multiplayer from Local multiplayer?",
+                options: [
+                    "LAN shares the Internet while Local uses Bluetooth.",
+                    "LAN players do not share the same screen or input device.",
+                    "LAN requires thousands of remote players.",
+                    "Local multiplayer requires server farms."
+                ],
+                answer: 1,
+                explanation: "LAN-based multiplayer connects personal computers over a local network, allowing local play without sharing a single screen."
+            },
+            {
+                q: "12. What revenue model is standard for persistent MMORPGs?",
+                options: ["One-time purchase only", "Subscription-based monthly fee", "Free-to-play with no monetization", "Pay-per-death model"],
+                answer: 1,
+                explanation: "MMORPGs persist 24/7 and usually maintain a subscription-based revenue model requiring monthly fees."
+            },
+            {
+                q: "13. Educational games teach through what core feature?",
+                options: ["In-game knowledge acquisition", "Adrenaline-pumping combat", "Micromanagement", "Gambling algorithms"],
+                answer: 0,
+                explanation: "Educational games feature in-game knowledge acquisition, embedding educational subjects directly into gameplay."
+            },
+            {
+                q: "14. How do government and military institutions like NASA and the Air Force use simulation games?",
+                options: ["For advertising products", "For recruitment and training", "For medical rehabilitation", "For artistic expression"],
+                answer: 1,
+                explanation: "Simulations are used by organizations like NASA and the Air Force for recruiting and training pilots and astronauts."
+            },
+            {
+                q: "15. Fitness-related games like Wii Fit and EA Sports Active fall under which subcategory?",
+                options: ["Advergames", "Exergames", "Process Sims", "TBS Games"],
+                answer: 1,
+                explanation: "Exergames are a subcategory of health and fitness games specifically designed around physical exercise."
+            },
+            {
+                q: "16. Re-Mission is a medical game designed to help children battling which condition?",
+                options: ["Asthma", "Diabetes", "Cancer", "Depression"],
+                answer: 2,
+                explanation: "Re-Mission gives children with cancer a sense of control over their disease by having them fight cancer cells."
+            },
+            {
+                q: "17. 'Games for change' are primarily created to raise awareness about:",
+                options: ["High-speed 3D rendering", "Social issues, beliefs, and values", "Console hardware specifications", "eSports tournament prize pools"],
+                answer: 1,
+                explanation: "Games for change are created by groups to spread awareness about social causes like poverty, climate change, and human rights."
+            },
+            {
+                q: "18. What feature allows Guitar Hero World Tour players to share custom instrumentals?",
+                options: ["GHTunes Service", "WarioWare D.I.Y.", "Advertainment", "LAN Play"],
+                answer: 0,
+                explanation: "Guitar Hero World Tour allowed creation and sharing of music via its GHTunes Service."
+            },
+            {
+                q: "19. Games specifically created as online advertising tools to feature a brand are called:",
+                options: ["Process Sims", "Advergames", "Exergames", "Platformers"],
+                answer: 1,
+                explanation: "Advergames are games custom-designed as interactive advertising tools for specific brand promotion."
+            },
+            {
+                q: "20. What is 'Advertainment'?",
+                options: [
+                    "A TV commercial played during loading screens.",
+                    "Branded web spaces with games and forums where consumers hang out.",
+                    "In-game pop-up banner ads.",
+                    "Paying players to watch video ads."
+                ],
+                answer: 1,
+                explanation: "Advertainment refers to brand-focused interactive sites containing games and forums to engage customers."
+            },
+            {
+                q: "21. Action games emphasize which type of player action?",
+                options: ["Reflective planning", "Reflexive actions and fast reaction time", "Slow resource management", "Text-based decoding"],
+                answer: 1,
+                explanation: "Action games rely on player reaction speed, snap judgments, and reflexive movements rather than reflective thought."
+            },
+            {
+                q: "22. The platformer action sub-genre focuses heavily on:",
+                options: ["Managing chess pieces", "Moving through environments by jumping and dodging obstacles", "First-person gunplay", "1-on-1 martial arts moves"],
+                answer: 1,
+                explanation: "Platformers focus on fast movement through environments—jumping, dodging, and collecting items."
+            },
+            {
+                q: "23. What visual advantage does a third-person shooter have over a first-person shooter?",
+                options: [
+                    "Third-person shooters completely hide the main character.",
+                    "Third-person shooters provide a wider surrounding perspective.",
+                    "Third-person shooters remove all fast-paced action.",
+                    "Third-person shooters do not allow weapon usage."
+                ],
+                answer: 1,
+                explanation: "Third-person shooters display the character and surrounding world, giving a wider perspective than FPS straight-ahead vision."
+            },
+            {
+                q: "24. What is the average duration of a fighting game session?",
+                options: ["30 seconds", "90 seconds", "5 minutes", "10 minutes"],
+                answer: 1,
+                explanation: "Fighting game matches are typically short and high-intensity, averaging around 90 seconds."
+            },
+            {
+                q: "25. Which game genre focuses on unraveling stories, exploring worlds, solving puzzles, and decoding messages?",
+                options: ["Action", "Adventure", "Casino", "Sports"],
+                answer: 1,
+                explanation: "Adventure games center around exploration, puzzle-solving, decoding, and narrative discovery."
+            },
+            {
+                q: "26. What is unique about the Action-Adventure hybrid genre?",
+                options: [
+                    "It is the only hybrid genre recognized as an accepted standalone genre.",
+                    "It eliminates all story elements from games.",
+                    "It cannot be played on consoles.",
+                    "It is strictly turn-based with no real-time elements."
+                ],
+                answer: 0,
+                explanation: "Action-Adventure is notable for being the only hybrid combination to establish itself as a recognized, distinct genre."
+            },
+            {
+                q: "27. Pure adventure gamers are often turned off by Action-Adventure games because:",
+                options: [
+                    "Action-adventure games have no puzzles.",
+                    "They prefer the slower, reflective pace of pure adventure games.",
+                    "Action-adventure games are text-only.",
+                    "Action-adventure games lack storyline progression."
+                ],
+                answer: 1,
+                explanation: "Pure adventure players favor thoughtful, slower pacing and may dislike the fast, reflexive combat required in action-adventures."
+            },
+            {
+                q: "28. Tetris is an example of which sub-category of puzzle games?",
+                options: ["Turn-based story puzzle", "Pattern-based real-time puzzle", "First-person shooter puzzle", "Construction process puzzle"],
+                answer: 1,
+                explanation: "Tetris is a famous pattern-based puzzle game played in real-time."
+            },
+            {
+                q: "29. What is a defining characteristic of Role-Playing Games (RPGs)?",
+                options: [
+                    "Absence of any narrative or story",
+                    "Player-characters that improve and gain strength/XP over time",
+                    "Game sessions lasting only 90 seconds",
+                    "Strict requirement for physical motion tracking"
+                ],
+                answer: 1,
+                explanation: "RPGs are defined by strong storylines and character progression through experience, stats, and equipment acquisition."
+            },
+            {
+                q: "30. Simulation games (Sims) attempt to:",
+                options: [
+                    "Replicate real-world systems, machines, and experiences using real rules",
+                    "Acknowledge that real-world physics should never be used",
+                    "Focus purely on abstract geometric blocks",
+                    "Limit play strictly to 2D side-scrolling"
+                ],
+                answer: 0,
+                explanation: "Simulations strive to model real-world systems, vehicles, and rules accurately."
+            },
+            {
+                q: "31. Sports games are classified under which simulation category?",
+                options: ["Vehicle Simulations", "Participatory Simulations", "Process Simulations", "Abstract Simulations"],
+                answer: 1,
+                explanation: "Sports games are participatory simulations because players participate in the sport as athletes or coaches."
+            },
+            {
+                q: "32. Process simulations are also commonly known as:",
+                options: ["Construction and Management Sims (CMS) or toy games", "First-Person Shooters", "Exergames", "Turn-Based Strategy"],
+                answer: 0,
+                explanation: "Process simulations involve building/managing systems and are known as Construction & Management Sims or toy games."
+            },
+            {
+                q: "33. How do process simulations differ from action or combat games in terms of player goals?",
+                options: [
+                    "Process sims require killing all enemy troops.",
+                    "Process sims focus on building/creating rather than destroying.",
+                    "Process sims end in 90 seconds.",
+                    "Process sims use physical body motion controls."
+                ],
+                answer: 1,
+                explanation: "Process sims are constructive (focused on building/controlling systems) rather than destructive combat games."
+            },
+            {
+                q: "34. Strategy games trace their historical origin back to:",
+                options: ["Military jet fighters", "Classic board games like chess", "Slot machines", "Arcade cabinets"],
+                answer: 1,
+                explanation: "Strategy games originated from classic tabletop strategy board games such as chess."
+            },
+            {
+                q: "35. What is a major gameplay challenge in Real-Time Strategy (RTS) games?",
+                options: [
+                    "Having too much time to think",
+                    "Micromanagement and balancing multiple resources simultaneously",
+                    "Lack of online connectivity",
+                    "Inability to create troops"
+                ],
+                answer: 1,
+                explanation: "RTS games place players under constant time pressure, requiring multitasking and micromanagement of resources."
+            },
+            {
+                q: "36. What is a primary social issue unique to Massively Multiplayer Online (MMO) games?",
+                options: [
+                    "Lack of human opponents",
+                    "Player misbehavior, harassment, cheating, or fraud",
+                    "Inability to save game progress",
+                    "Monochrome screen graphics"
+                ],
+                answer: 1,
+                explanation: "Because thousands of people interact in MMOs, player misbehavior (griefing, harassment, cheating) is a major concern."
+            },
+            {
+                q: "37. Which of the following is an example of an exergame?",
+                options: ["Tetris", "Wii Fit", "Dungeons & Dragons", "Chess"],
+                answer: 1,
+                explanation: "Wii Fit is a well-known commercial exergame designed to promote physical fitness."
+            },
+            {
+                q: "38. Which perspective is used in racing games?",
+                options: ["Only side-view 2D", "First-person or third-person perspective", "Top-down text perspective", "Isometric card view only"],
+                answer: 1,
+                explanation: "Racing games typically utilize either first-person (cockpit view) or third-person (behind the car) perspectives."
+            },
+            {
+                q: "39. Turn-Based Strategy (TBS) games appeal to players because:",
+                options: [
+                    "They force rapid reflexes within 90 seconds.",
+                    "They allow time to ponder discrete resource decisions.",
+                    "They remove all resource management.",
+                    "They require physical body movement."
+                ],
+                answer: 1,
+                explanation: "TBS games allow players to take time analyzing options and strategic resource deployment without time pressure."
+            },
+            {
+                q: "40. In First-Person Shooters (FPS), what can the player see on screen?",
+                options: [
+                    "Their full character body from behind.",
+                    "The character's weapons and other characters in the world, but not their own body.",
+                    "The entire map from a top-down satellite angle.",
+                    "Only text descriptions of the combat zone."
+                ],
+                answer: 1,
+                explanation: "In FPS games, player perspective is straight-ahead; players see held weapons and the environment, but not their own character's body."
+            },
+            {
+                q: "41. A game designed to teach high school students world geography while playing is classified as:",
+                options: ["Advergame", "Educational Game", "Exergame", "Casino Game"],
+                answer: 1,
+                explanation: "Games designed to teach academic subjects like geography fall into the educational game genre."
+            },
+            {
+                q: "42. WarioWare D.I.Y. is an example of a game centered on:",
+                options: ["Health & Fitness", "Aesthetics & Creativity", "Recruitment & Training", "Casino Gambling"],
+                answer: 1,
+                explanation: "WarioWare D.I.Y. focuses on aesthetics and creativity by allowing players to create games, music, and comics."
+            },
+            {
+                q: "43. Which of the following is NOT a tabletop game?",
+                options: ["Board game", "Card game", "Arcade cabinet game", "Pen-and-paper game"],
+                answer: 2,
+                explanation: "Arcade cabinet games are stand-alone electronic hardware systems, whereas tabletop games use physical cards, boards, or paper."
+            },
+            {
+                q: "44. What psychological motivation is most closely tied to the Casino game genre?",
+                options: ["Wish fulfillment", "Addiction and risk", "Aesthetic expression", "Physical rehabilitation"],
+                answer: 1,
+                explanation: "Casino games involve gambling mechanics, which are closely linked to addiction and risk-taking behavior."
+            },
+            {
+                q: "45. Why do action games require straightforward design and simplicity?",
+                options: [
+                    "Developers lack budget.",
+                    "The human brain cannot process complex extra data in fast-paced environments.",
+                    "Consoles cannot process action graphics.",
+                    "Players only play them for 10 seconds."
+                ],
+                answer: 1,
+                explanation: "Simplicity is necessary in action games because the human brain struggles to process heavy complex information during rapid reaction scenarios."
+            },
+            {
+                q: "46. What allows players to experience 'wish fulfillment' in sports simulations?",
+                options: [
+                    "Becoming extraordinary athletes and accomplishing impossible real-world feats",
+                    "Earning real-world money on every win",
+                    "Programming their own video game engines",
+                    "Playing without rules or boundaries"
+                ],
+                answer: 0,
+                explanation: "Sports sims offer wish fulfillment by allowing players to virtually perform as star athletes or lead teams as coaches."
+            },
+            {
+                q: "47. In two-player mode early in video game history, how did players interact?",
+                options: [
+                    "They played simultaneously on 100-player servers.",
+                    "They took turns playing against the game itself with identical single-player experiences.",
+                    "They motion-tracked their physical workouts.",
+                    "They engaged in voice-chat over the Internet."
+                ],
+                answer: 1,
+                explanation: "Early two-player games often had players take turns playing against the game, giving each person a single-player-style experience sequentially."
+            },
+            {
+                q: "48. MMORPG stands for:",
+                options: [
+                    "Massively Multiplayer Online Role-Playing Game",
+                    "Mobile Multiplayer Online Racing Platform Game",
+                    "Mainframe Multi-Option Real-time Process Game",
+                    "Massive Machine Offline Role-Playing Game"
+                ],
+                answer: 0,
+                explanation: "MMORPG = Massively Multiplayer Online Role-Playing Game."
+            },
+            {
+                q: "49. Which platform is best known for multiplayer connectivity via built-in cellular or Wi-Fi features on smartphones?",
+                options: ["Arcade", "Mobile", "Tabletop", "Console"],
+                answer: 1,
+                explanation: "Mobile devices (smartphones/tablets) feature diverse wireless connectivity (Wi-Fi/Cellular) ideal for portable multiplayer."
+            },
+            {
+                q: "50. What type of puzzle game usually features little to no story surrounding the gameplay?",
+                options: ["Pure Puzzle Game", "Action-Adventure Game", "RPGs", "Vehicle Sims"],
+                answer: 0,
+                explanation: "Pure puzzle games focus strictly on solving mechanics or patterns, typically with little or no story backdrop."
+            }
         ];
 
+        // Tab Navigation
         function switchTab(tabId) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
             
-            if (tabId === 'reviewer') {
+            if(tabId === 'reviewer') {
                 document.querySelectorAll('.tab-btn')[0].classList.add('active');
                 document.getElementById('reviewer').classList.add('active');
-                document.getElementById('control-bar').style.display = 'none';
             } else {
                 document.querySelectorAll('.tab-btn')[1].classList.add('active');
                 document.getElementById('exam').classList.add('active');
-                document.getElementById('control-bar').style.display = 'flex';
             }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        // Render Questions
         function renderExam() {
             const container = document.getElementById('questions-container');
             container.innerHTML = '';
 
-            examData.forEach((item, index) => {
-                const qCard = document.createElement('div');
-                qCard.className = 'question-card';
-                qCard.id = `q-card-${index}`;
+            rawExamData.forEach((item, qIndex) => {
+                const card = document.createElement('div');
+                card.className = 'question-card';
+                card.id = `question-${qIndex}`;
 
                 let optionsHTML = '';
-                item.options.forEach((opt, optIdx) => {
+                item.options.forEach((opt, oIndex) => {
                     optionsHTML += `
-                        <label class="option-label" id="label-${index}-${optIdx}">
-                            <input type="radio" name="question-${index}" value="${optIdx}">
-                            ${String.fromCharCode(65 + optIdx)}) ${opt}
+                        <label class="option-label">
+                            <input type="radio" name="q${qIndex}" value="${oIndex}" onchange="updateLiveScore()">
+                            <span>${opt}</span>
                         </label>
                     `;
                 });
 
-                qCard.innerHTML = `
-                    <div class="question-title">${index + 1}. ${item.q}</div>
+                card.innerHTML = `
+                    <div class="question-text">${item.q}</div>
                     <div class="options-list">${optionsHTML}</div>
-                    <div class="explanation" id="exp-${index}">
-                        <strong>Explanation:</strong> ${item.explanation}
+                    <div class="explanation" id="explanation-${qIndex}">
+                        <strong>Rationale:</strong> ${item.explanation}
                     </div>
                 `;
-                container.appendChild(qCard);
+                container.appendChild(card);
             });
+        }
+
+        // Live score tracking and submission
+        function updateLiveScore() {
+            let answered = 0;
+            rawExamData.forEach((_, idx) => {
+                const selected = document.querySelector(`input[name="q${idx}"]:checked`);
+                if(selected) answered++;
+            });
+            
+            // Only update counts prior to submission
+            const scoreDisplay = document.getElementById('score-display');
+            if(!scoreDisplay.dataset.submitted) {
+                scoreDisplay.innerHTML = `Progress: Answered ${answered} / ${rawExamData.length}`;
+            }
         }
 
         function submitExam() {
             let score = 0;
-            const total = examData.length;
+            const total = rawExamData.length;
 
-            examData.forEach((item, index) => {
-                const qCard = document.getElementById(`q-card-${index}`);
-                const selectedOption = document.querySelector(`input[name="question-${index}"]:checked`);
-                const expBox = document.getElementById(`exp-${index}`);
+            rawExamData.forEach((item, idx) => {
+                const card = document.getElementById(`question-${idx}`);
+                const selected = document.querySelector(`input[name="q${idx}"]:checked`);
+                const explanation = document.getElementById(`explanation-${idx}`);
                 
-                // Clear state
-                qCard.classList.remove('correct', 'incorrect');
-                item.options.forEach((_, optIdx) => {
-                    document.getElementById(`label-${index}-${optIdx}`).classList.remove('correct-option', 'incorrect-option');
-                });
-
-                const correctOptLabel = document.getElementById(`label-${index}-${item.answer}`);
-                correctOptLabel.classList.add('correct-option');
-
-                if (selectedOption) {
-                    const userVal = parseInt(selectedOption.value);
-                    if (userVal === item.answer) {
+                // Clear previous classes
+                card.classList.remove('correct', 'incorrect');
+                
+                if (selected) {
+                    const answerVal = parseInt(selected.value);
+                    if (answerVal === item.answer) {
                         score++;
-                        qCard.classList.add('correct');
+                        card.classList.add('correct');
                     } else {
-                        qCard.classList.add('incorrect');
-                        document.getElementById(`label-${index}-${userVal}`).classList.add('incorrect-option');
+                        card.classList.add('incorrect');
                     }
                 } else {
-                    qCard.classList.add('incorrect');
+                    card.classList.add('incorrect');
                 }
 
-                expBox.style.display = 'block';
+                // Show explanation
+                explanation.classList.add('visible');
             });
 
             const percentage = Math.round((score / total) * 100);
-            document.getElementById('score-display').innerHTML = `Score: <span>${score} / ${total} (${percentage}%)</span>`;
-            
+            const scoreDisplay = document.getElementById('score-display');
+            scoreDisplay.dataset.submitted = "true";
+            scoreDisplay.innerHTML = `Final Score: <span>${score} / ${total} (${percentage}%)</span>`;
+
+            // Scroll to top of exam
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function resetExam() {
+            rawExamData.forEach((_, idx) => {
+                const card = document.getElementById(`question-${idx}`);
+                const explanation = document.getElementById(`explanation-${idx}`);
+                card.classList.remove('correct', 'incorrect');
+                explanation.classList.remove('visible');
+                
+                const radios = document.getElementsByName(`q${idx}`);
+                radios.forEach(r => r.checked = false);
+            });
+
+            const scoreDisplay = document.getElementById('score-display');
+            delete scoreDisplay.dataset.submitted;
+            scoreDisplay.innerHTML = `Score: 0 / ${rawExamData.length} (0%)`;
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         // Initialize exam on load
-        window.onload = () => {
-            renderExam();
-        };
+        window.onload = renderExam;
     </script>
 </body>
 </html>
